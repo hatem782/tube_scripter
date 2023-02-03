@@ -3,15 +3,17 @@ import "./App.scss";
 
 import Login from "./pages/login/Index";
 import Register from "./pages/register/Index";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/*" element={<Navigate to="/login" />} />
+          <Route path="/*" element={<Navigate to="/home" />} />
         </Routes>
       </BrowserRouter>
     </div>

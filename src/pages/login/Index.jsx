@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import { TextField } from "../../components/inputs/TextField";
-import Buttons from "../../components/buttons/Buttons";
+import { White_Button } from "../../components/buttons/Buttons";
 
 import styles from "./Index.module.scss";
 
@@ -28,7 +28,7 @@ const Login = () => {
             <NavLink to={"/forgot_password"}>Forgot your password ? </NavLink>
           </div>
 
-          <Buttons onClick={() => {}}>Login</Buttons>
+          <White_Button onClick={() => {}}>Login</White_Button>
 
           <div className={styles.alt_login}>
             <h4> Or login with </h4>

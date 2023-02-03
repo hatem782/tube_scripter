@@ -1,0 +1,13 @@
+.main {
+  width: 100%;
+  padding: 120px 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  div {
+    width: 48%;
+  }
+}

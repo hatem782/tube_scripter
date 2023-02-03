@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import { TextField } from "../../components/inputs/TextField";
-import Buttons from "../../components/buttons/Buttons";
+import { White_Button } from "../../components/buttons/Buttons";
 
 import styles from "./Index.module.scss";
 
@@ -27,7 +27,7 @@ const Register = () => {
             <TextField type="password" placeholder="confirm Password" />
           </div>
 
-          <Buttons onClick={() => {}}>Create an account</Buttons>
+          <White_Button onClick={() => {}}>Create an account</White_Button>
 
           <div className={styles.alt_login}>
             <h4> Or login with </h4>

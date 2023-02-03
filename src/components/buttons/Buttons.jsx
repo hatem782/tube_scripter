@@ -1,12 +1,29 @@
 import React from "react";
-import styles from "./styles.module.scss";
+import styles from "./buttons.module.scss";
 
-function Buttons({ children, onClick }) {
+import play_img from "../../assets/svg/play.svg";
+
+export function White_Button({ children, onClick }) {
   return (
-    <div className={styles.button} onClick={onClick}>
+    <button className={styles.white_button} onClick={onClick}>
       {children}
-    </div>
+    </button>
   );
 }
 
-export default Buttons;
+export function Red_Button({ children, onClick }) {
+  return (
+    <button className={styles.red_button} onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
+export function Red_Button2({ children, onClick }) {
+  return (
+    <button className={styles.red_button2} onClick={onClick}>
+      <img src={play_img} alt="play" />
+      {children}
+    </button>
+  );
+}
