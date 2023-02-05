@@ -1,0 +1,136 @@
+.main {
+  width: 100%;
+  padding: 100px 140px;
+
+  position: relative;
+
+  .fig {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 600px;
+  }
+
+  h1 {
+    font-size: 58px;
+    font-weight: 700;
+    font-family: "Montserrat";
+    margin: 0px;
+    span {
+      color: red;
+    }
+  }
+
+  .carossel {
+    width: 1300px;
+    margin: 100px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .nav_btn {
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .reviews {
+      width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.review {
+  position: relative;
+  font-family: "Montserrat";
+
+  img {
+    height: 300px;
+  }
+
+  .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    padding: 20px 30px 20px 40px;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transform: translateY(-20px);
+      margin: 0px 0px -20px 0px;
+
+      .user_img {
+        height: 120px;
+        aspect-ratio: 1/1;
+        border-radius: 500px;
+        object-fit: cover;
+        margin: 0px 10px 0px 0px;
+        transform: translateY(-30px);
+        border: solid 5px black;
+        outline: solid 3px black;
+      }
+
+      h3 {
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0px;
+        font-family: "Montserrat";
+      }
+      span {
+        font-size: 12px;
+        font-weight: 400;
+        color: white;
+        font-family: "Montserrat";
+      }
+
+      .stars {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        img {
+          height: 16px;
+          margin: 0px 2px 0px 0px;
+        }
+      }
+    }
+    p {
+      font-size: 14px;
+      font-family: "Montserrat";
+      color: white;
+      line-height: 1.8;
+      text-align: justify;
+      margin: 0px;
+    }
+  }
+}
+
+.isfront {
+  z-index: 3;
+  .content {
+    .header {
+      .user_img {
+        border: solid 5px black;
+        outline: solid 3px red;
+      }
+    }
+  }
+}
+
+.isleft {
+  opacity: 0.39;
+  transform: translateX(5%);
+}
+
+.isright {
+  opacity: 0.39;
+  transform: translateX(-5%);
+}

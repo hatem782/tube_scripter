@@ -1,0 +1,85 @@
+.main {
+  position: relative;
+  width: 100%;
+  padding: 100px 280px 150px 280px;
+  font-family: "Montserrat";
+
+  .bot_fig {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 150px;
+  }
+
+  .top_fig {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+  }
+
+  h1 {
+    width: 940px;
+    text-align: center;
+    font-size: 45px;
+    margin: 0px auto 130px auto;
+  }
+
+  .stats {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .stat {
+      width: 25%;
+
+      .img_cont {
+        width: 100%;
+        aspect-ratio: 1/1;
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 100%;
+        }
+
+        .data {
+          position: absolute;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          padding: 60px 30px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+
+          h2 {
+            color: red;
+            text-align: center;
+            font-size: 60px;
+            font-family: "Gotham";
+            margin: 0px;
+          }
+          span {
+            font-size: 25px;
+            font-weight: 600;
+          }
+        }
+      }
+      p {
+        color: #949494;
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 30px;
+        text-align: center;
+        margin: 0px;
+      }
+    }
+  }
+}

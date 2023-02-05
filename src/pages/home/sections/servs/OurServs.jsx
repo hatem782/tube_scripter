@@ -17,17 +17,17 @@ function OurServs() {
         description="Lorem Ipsum is simply dummy text of"
       />
       <ServCard
-        img={idea}
+        img={click}
         title="Lorem Ipsum is simply dummy text of "
         description="Lorem Ipsum is simply dummy text of"
       />
       <ServCard
-        img={idea}
+        img={fast_time}
         title="Lorem Ipsum is simply dummy text of "
         description="Lorem Ipsum is simply dummy text of"
       />
       <ServCard
-        img={idea}
+        img={people}
         title="Lorem Ipsum is simply dummy text of "
         description="Lorem Ipsum is simply dummy text of"
       />
