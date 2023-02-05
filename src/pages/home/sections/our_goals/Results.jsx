@@ -15,6 +15,7 @@ function Results() {
       <div className={styles.circles}>
         <img
           src={circles_img}
+          className={styles.circles_img}
           alt="Des millions de personnes deviennent de meilleurs écrivains"
         />
         <div className={styles.content}>
