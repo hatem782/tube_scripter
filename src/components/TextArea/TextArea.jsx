@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-export function TextField(props) {
+export function TextArea(props) {
   const {
     placeholder,
     name,
@@ -34,7 +34,8 @@ export function TextField(props) {
         </label>
       )}
       <div className={styles.input}>
-        <input
+        <textarea
+          rows={4}
           type={is_pass ? (show ? "text" : "password") : "text"}
           placeholder={placeholder}
         />
@@ -49,4 +50,4 @@ export function TextField(props) {
   );
 }
 
-export default TextField;
+export default TextArea;

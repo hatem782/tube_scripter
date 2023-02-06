@@ -15,7 +15,9 @@ const Login = () => {
   return (
     <div className={styles.main}>
       <div className={styles.section}>
-        <img className={styles.logo} src={logo} />
+        <NavLink to="/home">
+          <img className={styles.logo} src={logo} />
+        </NavLink>
         <div className={styles.form}>
           <h3 className={styles.title}>Sign in</h3>
           <TextField type="text" placeholder="Email or Username" />

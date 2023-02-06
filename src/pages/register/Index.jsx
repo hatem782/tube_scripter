@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 
 import { TextField } from "../../components/inputs/TextField";
 import { White_Button } from "../../components/buttons/Buttons";
+import { NavLink } from "react-router-dom";
 
 import styles from "./Index.module.scss";
 
@@ -15,7 +15,9 @@ const Register = () => {
   return (
     <div className={styles.main}>
       <div className={styles.section}>
-        <img className={styles.logo} src={logo} />
+        <NavLink to="/home">
+          <img className={styles.logo} src={logo} />
+        </NavLink>
         <div className={styles.form}>
           <h3 className={styles.title}>Create an account</h3>
 
