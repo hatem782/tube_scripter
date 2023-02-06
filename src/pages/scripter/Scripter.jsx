@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DashNav from "../../layouts/dash-navbar/DashNav";
 import { Red_Button } from "../../components/buttons/Buttons";
 
 import styles from "./scripter.module.scss";
@@ -51,7 +50,6 @@ function Scripter() {
 
   return (
     <div className={styles.main}>
-      <DashNav />
       <div className={styles.content}>
         <div className={styles.window}>
           <div className={styles.head}>
@@ -71,8 +69,8 @@ function Scripter() {
             </div>
           </div>
           <div className={styles.body}>
-            {scrp_type.value==="yt" && <YoutubeScripter />}
-            {scrp_type.value==="vs" && <TikTokScripter />}
+            {scrp_type.value === "yt" && <YoutubeScripter />}
+            {scrp_type.value === "vs" && <TikTokScripter />}
           </div>
 
           <div className={styles.footer}>

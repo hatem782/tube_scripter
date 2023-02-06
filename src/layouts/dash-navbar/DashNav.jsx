@@ -12,13 +12,21 @@ import { NavLink } from "react-router-dom";
 function DashNav() {
   return (
     <div className={styles.main}>
-      <img src={logo} className={styles.logo} alt="tube scripter" />
+      <NavLink to="/home">
+        <img src={logo} className={styles.logo} alt="tube scripter" />
+      </NavLink>
       <div className={styles.content}>
         <span className={styles.link}>
           <NavLink to="/home">Accueil</NavLink>
         </span>
         <span className={styles.link}>
-          <NavLink to="/home"> Scripte </NavLink>
+          <NavLink to="/script"> Scripte </NavLink>
+        </span>
+        <span className={styles.link}>
+          <NavLink to="/bibleo"> Bibleothéque </NavLink>
+        </span>
+        <span className={styles.link}>
+          <NavLink to="/contact"> Contact </NavLink>
         </span>
         <span className={styles.separator} />
         <img className={styles.user_img} src={user_img} alt="user" />
@@ -44,7 +52,7 @@ const Select = () => {
       </div>
       {open && (
         <div className={styles.hidden}>
-          <NavLink to="/profile">
+          <NavLink to="/settings">
             <div className={styles.item}>
               <img src={setting} alt="settings" /> <span>Paramétre</span>
             </div>

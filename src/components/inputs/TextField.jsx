@@ -13,6 +13,7 @@ export function TextField(props) {
     onChange,
     isLabeled = false,
     label,
+    className = "",
   } = props;
 
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ export function TextField(props) {
   };
 
   return (
-    <div className={styles.text_field}>
+    <div className={`${styles.text_field} ${className}`}>
       {isLabeled && (
         <label>
           <span className={styles.title}>

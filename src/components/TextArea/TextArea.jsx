@@ -13,6 +13,8 @@ export function TextArea(props) {
     onChange,
     isLabeled = false,
     label,
+    className = "",
+    rows = 4,
   } = props;
 
   const [show, setShow] = useState(false);
@@ -23,7 +25,7 @@ export function TextArea(props) {
   };
 
   return (
-    <div className={styles.text_field}>
+    <div className={`${styles.text_field} ${className}`}>
       {isLabeled && (
         <label>
           <span className={styles.title}>
@@ -35,7 +37,7 @@ export function TextArea(props) {
       )}
       <div className={styles.input}>
         <textarea
-          rows={4}
+          rows={rows}
           type={is_pass ? (show ? "text" : "password") : "text"}
           placeholder={placeholder}
         />
