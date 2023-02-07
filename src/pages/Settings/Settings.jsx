@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../custom/axios";
 
 import styles from "./settings.module.scss";
@@ -10,27 +10,34 @@ import user_img from "../../assets/images/user3.png";
 import { Red_Button } from "../../components/buttons/Buttons";
 import Switcher from "../../components/switcher/Switcher";
 
-import { plans } from "../home/sections/our_plans/data";
+import { plans_en } from "../home/sections/our_plans/data";
 
 import available_img from "../../assets/svg/plans/available.svg";
 import not_available from "../../assets/svg/plans/not_available.svg";
 import DashNav from "../../layouts/dash-navbar/DashNav";
 import Footer from "../../layouts/footer/Footer";
 import { useSelector } from "react-redux";
-// import
+import GetText from "./settings.lang";
+
 function Settings() {
+  const user = useSelector((state) => state.UserReducer?.user);
+  const lang = useSelector((state) => state?.LangReducer?.lang);
+  const [text, setText] = useState(GetText(lang));
+  useEffect(() => {
+    setText(GetText(lang));
+  }, [lang]);
+
   const sections = [
     {
-      title: "Profile",
+      title: text.Profile,
       value: "pf",
     },
     {
-      title: "Votre plan",
+      title: text.Your_plan,
       value: "vp",
     },
   ];
   const [section, setSection] = useState(sections[0]);
-  const user = useSelector((state) => state.UserReducer?.user);
 
   return (
     <>
@@ -47,7 +54,7 @@ function Settings() {
                 {user.firstName} {user.lastName}
               </h2>
               <p>{user.email}</p>
-              <Red_Button>Modifier les détails</Red_Button>
+              <Red_Button>{text.change_details}</Red_Button>
             </div>
             <div className={styles.right_side}>
               <div className={styles.header}>
@@ -68,8 +75,8 @@ function Settings() {
                 })}
               </div>
               <div className={styles.body}>
-                {section.value === "pf" && <Profile />}
-                {section.value === "vp" && <VotrePlan />}
+                {section.value === "pf" && <Profile text={text} />}
+                {section.value === "vp" && <VotrePlan text={text} />}
               </div>
             </div>
           </div>
@@ -80,34 +87,34 @@ function Settings() {
   );
 }
 
-const Profile = () => {
+const Profile = ({ text }) => {
   const user = useSelector((state) => state.UserReducer?.user);
   return (
     <div className={styles.profile}>
       <div className={styles.info}>
-        <h4>Nom&Prénom</h4>
+        <h4>{text.name_and_lastname}</h4>
         <h2>
           {user.firstName} {user.lastName}
         </h2>
       </div>
 
       <div className={styles.info}>
-        <h4>Adresse e-mail</h4>
+        <h4>{text.Email_address}</h4>
         <h2>{user.email}</h2>
       </div>
 
       <div className={styles.info}>
-        <h4>Language</h4>
+        <h4>{text.Language}</h4>
         <h2>Français</h2>
       </div>
 
       <div className={styles.info}>
-        <h4>Nombre des mots</h4>
+        <h4>{text.Number_of_words}</h4>
         <h2>{user.nbr_words}</h2>
       </div>
 
       <div className={styles.info}>
-        <h4>Notifications</h4>
+        <h4>{text.Notifications}</h4>
         <h2 className={styles.notif}>
           On
           <Switcher />
@@ -117,9 +124,9 @@ const Profile = () => {
   );
 };
 
-const VotrePlan = () => {
+const VotrePlan = ({ text }) => {
   let plan_index = 1;
-  let plan = plans[plan_index];
+  let plan = text.plan[plan_index];
   const user = useSelector((state) => state.UserReducer.user);
 
   const cancel_sub = async () => {
@@ -136,7 +143,7 @@ const VotrePlan = () => {
 
   return (
     <div className={styles.votre_plan}>
-      <span className={styles.actual}>Votre forfait actuel</span>
+      <span className={styles.actual}>{text.Your_current_plan}</span>
 
       <div className={styles.plan}>
         <h2>{plan.title}</h2>
@@ -150,7 +157,7 @@ const VotrePlan = () => {
           })}
         </div>
       </div>
-      <Red_Button onClick={cancel_sub}>Cancel Subscription</Red_Button>
+      <Red_Button onClick={cancel_sub}>{text.Cancel_Subscription}</Red_Button>
     </div>
   );
 };

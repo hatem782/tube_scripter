@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import GetText from "./stats.lang";
 import styles from "./stats.module.scss";
 
 import top_fig from "../../../../assets/svg/stats/top_fig.svg";
@@ -9,11 +11,17 @@ import circle_75 from "../../../../assets/svg/stats/circle_75.png";
 import circle_100 from "../../../../assets/svg/stats/circle_100.png";
 
 function Stats() {
+  const lang = useSelector((state) => state?.LangReducer?.lang);
+  const [text, setText] = useState(GetText(lang));
+  useEffect(() => {
+    setText(GetText(lang));
+  }, [lang]);
+
   return (
     <div className={styles.main}>
       <img className={styles.top_fig} src={top_fig} />
       <img className={styles.bot_fig} src={bot_fig} />
-      <h1>Des millions de personnes deviennent de meilleurs écrivains</h1>
+      <h1>{text.title}</h1>
 
       <div className={styles.stats}>
         <div className={styles.stat}>
@@ -21,10 +29,10 @@ function Stats() {
             <img src={circle_50} />
             <div className={styles.data}>
               <h2>75%</h2>
-              <span>Temps gagné</span>
+              <span>{text.circle1.title}</span>
             </div>
           </div>
-          <p>Des millions de personnes font confiance au gain de temps</p>
+          <p>{text.circle1.parag}</p>
         </div>
 
         <div className={styles.stat}>
@@ -32,10 +40,10 @@ function Stats() {
             <img src={circle_75} />
             <div className={styles.data}>
               <h2>50+</h2>
-              <span>Million</span>
+              <span>{text.circle2.title}</span>
             </div>
           </div>
-          <p>Des millions de personnes font confiance au gain de temps</p>
+          <p>{text.circle2.parag}</p>
         </div>
 
         <div className={styles.stat}>
@@ -43,10 +51,10 @@ function Stats() {
             <img src={circle_100} />
             <div className={styles.data}>
               <h2>125</h2>
-              <span>Mots</span>
+              <span>{text.circle3.title}</span>
             </div>
           </div>
-          <p>Des millions de personnes font confiance au gain de temps</p>
+          <p>{text.circle3.parag}</p>
         </div>
       </div>
     </div>

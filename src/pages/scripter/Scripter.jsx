@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Red_Button } from "../../components/buttons/Buttons";
+import GetText from "./scripter.lang";
 
 import styles from "./scripter.module.scss";
 import menu_icon from "../../assets/svg/script/menu.svg";
-import youtube_icon from "../../assets/svg/script/youtube.svg";
 import arrow from "../../assets/svg/navbar/select_.svg";
 import fr_flag from "../../assets/svg/footer/fr.png";
 import en_flag from "../../assets/svg/footer/en.png";
@@ -34,16 +34,21 @@ import { useSelector } from "react-redux";
 import { isPremium, isStandar } from "../../custom/user.access";
 
 function Scripter() {
-  // open and close the selector of the youtube / video
+  const lang = useSelector((state) => state?.LangReducer?.lang);
+  const [text, setText] = useState(GetText(lang));
+  useEffect(() => {
+    setText(GetText(lang));
+  }, [lang]);
+
   const scripts_types = [
     {
       img: youtube2,
-      title: "YouTube Scripter",
+      title: text.YouTube_Scripter,
       value: "yt",
     },
     {
       img: video_scripter,
-      title: "Tiktok Scripter",
+      title: text.Tiktok_Scripter,
       value: "vs",
     },
   ];
@@ -82,8 +87,8 @@ function Scripter() {
               </div>
             </div>
             <div className={styles.body}>
-              {scrp_type.value === "yt" && <YoutubeScripter />}
-              {scrp_type.value === "vs" && <TikTokScripter />}
+              {scrp_type.value === "yt" && <YoutubeScripter text={text} />}
+              {scrp_type.value === "vs" && <TikTokScripter text={text} />}
             </div>
 
             {/* <div className={styles.footer}>
@@ -125,7 +130,7 @@ function Scripter() {
   );
 }
 
-const YoutubeScripter = () => {
+const YoutubeScripter = ({ text }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
@@ -150,8 +155,12 @@ const YoutubeScripter = () => {
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.selects}>
-          <SelectFlag onChange={handle_change} name="language" />
-          <SelectMood onChange={handle_change} name="tone_of_voice" />
+          <SelectFlag onChange={handle_change} text={text} name="language" />
+          <SelectMood
+            onChange={handle_change}
+            text={text}
+            name="tone_of_voice"
+          />
         </div>
         <div className={styles.input}>
           <TextField
@@ -159,7 +168,7 @@ const YoutubeScripter = () => {
             onChange={handle_change}
             value={form.search_term}
             name="search_term"
-            label="Mots Clés"
+            label={text.Key_words}
             placeholder="EX : Neutral,Formal,Friendly"
           />
         </div>
@@ -169,27 +178,27 @@ const YoutubeScripter = () => {
             value={form.video_description}
             name="video_description"
             isLabeled={true}
-            label="Description"
+            label={text.Description}
           />
         </div>
         <div className={styles.button}>
           <Red_Button loading={script?.payload} onClick={GetAllPossible}>
-            Générer
+            {text.Generate}
           </Red_Button>
         </div>
       </div>
       <div className={styles.result}>
-        <Block label={`Titre : ${script?.youtubetitles[0] || ""}`} />
+        <Block label={`${text.Title} : ${script?.youtubetitles[0] || ""}`} />
 
         <Block
-          label={"Paragraphe vidéo : "}
+          label={text.Video_paragraph}
           parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
           parag={script?.paragraphwriter[0] || ""}
         />
 
         {isPremium(user) && (
           <Block
-            label={"Hooks : "}
+            label={text.Hooks}
             parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
             parag={script?.youtubehooks[0] || ""}
           />
@@ -197,7 +206,7 @@ const YoutubeScripter = () => {
 
         {isPremium(user) && (
           <Block
-            label={"Description vidéo : "}
+            label={text.Video_description}
             parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
             parag={script?.youtubedescriptions[0] || ""}
           />
@@ -205,7 +214,7 @@ const YoutubeScripter = () => {
 
         {isPremium(user) && (
           <Block
-            label={"Intro vidéo : "}
+            label={text.Video_intro}
             parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
             parag={script?.youtubeintros[0] || ""}
           />
@@ -221,7 +230,7 @@ const YoutubeScripter = () => {
   );
 };
 
-const TikTokScripter = () => {
+const TikTokScripter = ({ text }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
@@ -244,8 +253,12 @@ const TikTokScripter = () => {
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.selects}>
-          <SelectFlag onChange={handle_change} name="language" />
-          <SelectMood onChange={handle_change} name="tone_of_voice" />
+          <SelectFlag onChange={handle_change} text={text} name="language" />
+          <SelectMood
+            onChange={handle_change}
+            text={text}
+            name="tone_of_voice"
+          />
         </div>
         <div className={styles.input}>
           <TextArea
@@ -253,18 +266,18 @@ const TikTokScripter = () => {
             value={form.description}
             name="description"
             isLabeled={true}
-            label="Description"
+            label={text.Description}
           />
         </div>
         <div className={styles.button}>
           <Red_Button loading={script?.payload} onClick={GetAllPossible}>
-            Générer
+            {text.Generate}
           </Red_Button>
         </div>
       </div>
       <div className={styles.result}>
         <Block
-          label={"Description : "}
+          label={text.Description}
           parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
           parag={script?.tiktokscriptdescription[0] || ""}
         />
@@ -278,10 +291,10 @@ const TikTokScripter = () => {
   );
 };
 
-const SelectFlag = ({ onChange, name }) => {
+const SelectFlag = ({ onChange, name, text }) => {
   let items = [
-    { img: fr_flag, title: "French", value: "fr" },
-    { img: en_flag, title: "English", value: "en" },
+    { img: fr_flag, title: text.french, value: "fr" },
+    { img: en_flag, title: text.english, value: "en" },
   ];
   const [select, setSelect] = useState(items[0]);
   const [open, setOpen] = useState(false);
@@ -328,19 +341,9 @@ const SelectFlag = ({ onChange, name }) => {
   );
 };
 
-const SelectMood = ({ onChange, name }) => {
+const SelectMood = ({ onChange, name, text }) => {
   //
-  let items = [
-    { title: "Excited", value: "excited" },
-    { title: "Professional", value: "professional" },
-    { title: "Funny", value: "funny" },
-    { title: "Encouraging", value: "encouraging" },
-    { title: "Dramatic", value: "dramatic" },
-    { title: "Witty", value: "witty" },
-    { title: "Sarcastic", value: "sarcastic" },
-    { title: "Engaging", value: "engaging" },
-    { title: "Creative", value: "creative" },
-  ];
+  let items = text.items;
   const [select, setSelect] = useState(items[0]);
   const [open, setOpen] = useState(false);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./reviews.module.scss";
 
 import figure_img from "../../../../assets/svg/reviews/figure.png";
@@ -11,13 +11,22 @@ import star from "../../../../assets/svg/reviews/star.svg";
 
 import user_img from "../../../../assets/images/user1.png";
 
+import { useSelector } from "react-redux";
+import GetText from "./reviews.lang";
+
 function Reviews() {
+  const lang = useSelector((state) => state?.LangReducer?.lang);
+  const [text, setText] = useState(GetText(lang));
+  useEffect(() => {
+    setText(GetText(lang));
+  }, [lang]);
+
   return (
     <div className={styles.main}>
       <img className={styles.fig} src={figure_img} />
       <h1>
-        1000+ Clients <br />
-        Adorent <span>Tube Scripter </span>
+        {text.title_p1} <br />
+        {text.title_p2} <span>Tube Scripter </span>
       </h1>
 
       <div className={styles.carossel}>

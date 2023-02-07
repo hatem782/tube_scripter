@@ -17,6 +17,7 @@ import Toast from "./components/Toast/CustomToaster";
 
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserByToken } from "./redux/User/user.actions";
+import { GetLangByToken } from "./redux/lang/lang.actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
 
   useEffect(() => {
     dispatch(GetUserByToken(stop_loading));
+    dispatch(GetLangByToken());
   }, []);
 
   return (
