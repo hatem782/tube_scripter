@@ -9,7 +9,7 @@ import sign_out from "../../assets/svg/navbar/sign-out.svg";
 import user_img from "../../assets/images/user2.png";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Disconnect } from "../../redux/User/user.actions";
 
 function DashNav() {
@@ -43,6 +43,7 @@ const Select = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.UserReducer?.user);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -56,7 +57,10 @@ const Select = () => {
   return (
     <div className={styles.select}>
       <div className={styles.showed} onClick={handleOpen}>
-        <span>Amanie s.</span> <img src={select_arrow} />
+        <span>
+          {user.firstName} {user.lastName}
+        </span>
+        <img src={select_arrow} />
       </div>
       {open && (
         <div className={styles.hidden}>

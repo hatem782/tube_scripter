@@ -30,6 +30,7 @@ function Settings() {
     },
   ];
   const [section, setSection] = useState(sections[0]);
+  const user = useSelector((state) => state.UserReducer?.user);
 
   return (
     <>
@@ -42,8 +43,10 @@ function Settings() {
           <div className={styles.container2}>
             <div className={styles.left_side}>
               <img src={user_img} alt="user" />
-              <h2>Amanie ssame</h2>
-              <p>Amaniesame@gmail.com</p>
+              <h2>
+                {user.firstName} {user.lastName}
+              </h2>
+              <p>{user.email}</p>
               <Red_Button>Modifier les détails</Red_Button>
             </div>
             <div className={styles.right_side}>
