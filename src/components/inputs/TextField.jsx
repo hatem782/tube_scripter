@@ -8,7 +8,7 @@ export function TextField(props) {
   const {
     placeholder,
     name,
-    value,
+    value = "",
     type = "text",
     onChange,
     isLabeled = false,
@@ -36,6 +36,9 @@ export function TextField(props) {
       )}
       <div className={styles.input}>
         <input
+          name={name}
+          onChange={onChange}
+          value={value}
           type={is_pass ? (show ? "text" : "password") : "text"}
           placeholder={placeholder}
         />

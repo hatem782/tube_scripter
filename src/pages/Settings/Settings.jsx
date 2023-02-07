@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "../../custom/axios";
 
 import styles from "./settings.module.scss";
 
@@ -13,6 +14,9 @@ import { plans } from "../home/sections/our_plans/data";
 
 import available_img from "../../assets/svg/plans/available.svg";
 import not_available from "../../assets/svg/plans/not_available.svg";
+import DashNav from "../../layouts/dash-navbar/DashNav";
+import Footer from "../../layouts/footer/Footer";
+import { useSelector } from "react-redux";
 // import
 function Settings() {
   const sections = [
@@ -28,44 +32,48 @@ function Settings() {
   const [section, setSection] = useState(sections[0]);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.container}>
-        <img src={top_fig} className={styles.top_fig} alt="figure" />
-        <img src={bot_fig} className={styles.bot_fig} alt="figure" />
+    <>
+      <DashNav />
+      <div className={styles.main}>
+        <div className={styles.container}>
+          <img src={top_fig} className={styles.top_fig} alt="figure" />
+          <img src={bot_fig} className={styles.bot_fig} alt="figure" />
 
-        <div className={styles.container2}>
-          <div className={styles.left_side}>
-            <img src={user_img} alt="user" />
-            <h2>Amanie ssame</h2>
-            <p>Amaniesame@gmail.com</p>
-            <Red_Button>Modifier les détails</Red_Button>
-          </div>
-          <div className={styles.right_side}>
-            <div className={styles.header}>
-              {sections.map((sec, key) => {
-                return (
-                  <div
-                    key={key}
-                    onClick={() => {
-                      setSection(sec);
-                    }}
-                    className={`
+          <div className={styles.container2}>
+            <div className={styles.left_side}>
+              <img src={user_img} alt="user" />
+              <h2>Amanie ssame</h2>
+              <p>Amaniesame@gmail.com</p>
+              <Red_Button>Modifier les détails</Red_Button>
+            </div>
+            <div className={styles.right_side}>
+              <div className={styles.header}>
+                {sections.map((sec, key) => {
+                  return (
+                    <div
+                      key={key}
+                      onClick={() => {
+                        setSection(sec);
+                      }}
+                      className={`
                     ${styles.button} 
                     ${sec.value === section.value ? styles.active : ""}`}
-                  >
-                    {sec.title}
-                  </div>
-                );
-              })}
-            </div>
-            <div className={styles.body}>
-              {section.value === "pf" && <Profile />}
-              {section.value === "vp" && <VotrePlan />}
+                    >
+                      {sec.title}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className={styles.body}>
+                {section.value === "pf" && <Profile />}
+                {section.value === "vp" && <VotrePlan />}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
@@ -101,6 +109,20 @@ const Profile = () => {
 const VotrePlan = () => {
   let plan_index = 1;
   let plan = plans[plan_index];
+  const user = useSelector((state) => state.UserReducer.user);
+
+  const cancel_sub = async () => {
+    console.log(user.subscribe_id);
+    try {
+      const resp = await axios.post("/api/payment/cancel-subscription", {
+        subscription_id: user.subscribe_id,
+      });
+      console.log(resp);
+    } catch (error) {
+      // console.log()
+    }
+  };
+
   return (
     <div className={styles.votre_plan}>
       <span className={styles.actual}>Votre forfait actuel</span>
@@ -117,7 +139,7 @@ const VotrePlan = () => {
           })}
         </div>
       </div>
-      <span className={styles.change}>Changer le forfait ?</span>
+      <Red_Button onClick={cancel_sub}>Cancel Subscription</Red_Button>
     </div>
   );
 };

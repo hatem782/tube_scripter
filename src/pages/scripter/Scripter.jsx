@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Red_Button } from "../../components/buttons/Buttons";
 
 import styles from "./scripter.module.scss";
@@ -21,6 +21,17 @@ import reload_fig from "../../assets/svg/script/reload.svg";
 
 import TextField from "../../components/inputs/TextField";
 import TextArea from "../../components/TextArea/TextArea";
+import DashNav from "../../layouts/dash-navbar/DashNav";
+import Footer from "../../layouts/footer/Footer";
+
+import { useDispatch } from "react-redux";
+import {
+  GetAllScriptsYT,
+  GetAllScriptsTikTok,
+} from "../../redux/Scripter/scripter.actions";
+
+import { useSelector } from "react-redux";
+import { isPremium, isStandar } from "../../custom/user.access";
 
 function Scripter() {
   // open and close the selector of the youtube / video
@@ -39,180 +50,238 @@ function Scripter() {
   const [open, setOpen] = useState(false);
   const [scrp_type, setScrp_type] = useState(scripts_types[0]);
 
-  const handleopne = () => {
-    setOpen(!open);
-  };
-
   const handleSelect = (type) => {
     setScrp_type(type);
     setOpen(false);
   };
 
+  const handleopne = () => {
+    setOpen(!open);
+  };
+
   return (
-    <div className={styles.main}>
-      <div className={styles.content}>
-        <div className={styles.window}>
-          <div className={styles.head}>
-            <img
-              onClick={handleopne}
-              src={menu_icon}
-              className={styles.menu_btn}
-              alt="menu btn"
-            />
-            <div className={styles.selected_scripter}>
+    <>
+      <DashNav />
+      <div className={styles.main}>
+        <div className={styles.content}>
+          <div className={styles.window}>
+            <div className={styles.head}>
               <img
-                src={scrp_type.img}
-                className={styles.icon}
-                alt={scrp_type.title}
+                onClick={handleopne}
+                src={menu_icon}
+                className={styles.menu_btn}
+                alt="menu btn"
               />
-              <span>{scrp_type.title}</span>
-            </div>
-          </div>
-          <div className={styles.body}>
-            {scrp_type.value === "yt" && <YoutubeScripter />}
-            {scrp_type.value === "vs" && <TikTokScripter />}
-          </div>
-
-          <div className={styles.footer}>
-            <div className={styles.left_side}>
-              <Red_Button>Générer</Red_Button>
-            </div>
-            <div className={styles.right_side}>
-              <Red_Button>
-                <img src={reload_fig} alt="reload" />
-              </Red_Button>
-            </div>
-          </div>
-
-          {open && (
-            <div className={styles.scripter_selector}>
-              <div className={styles.left_side}>
-                <div className={styles.rech_input}>
-                  <img src={loop_fig} />
-                  <input placeholder="Recherche" />
-                </div>
-                <div className={styles.scripters_types}>
-                  {scripts_types.map((item, key) => {
-                    return (
-                      <div
-                        key={key}
-                        onClick={() => {
-                          handleSelect(item);
-                        }}
-                        className={styles.scripter_type}
-                      >
-                        <img src={item.img} />
-                        <span>{item.title}</span>
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className={styles.selected_scripter}>
+                <img
+                  src={scrp_type.img}
+                  className={styles.icon}
+                  alt={scrp_type.title}
+                />
+                <span>{scrp_type.title}</span>
               </div>
             </div>
-          )}
+            <div className={styles.body}>
+              {scrp_type.value === "yt" && <YoutubeScripter />}
+              {scrp_type.value === "vs" && <TikTokScripter />}
+            </div>
+
+            {/* <div className={styles.footer}>
+              <div className={styles.left_side}></div>
+              <div className={styles.right_side}></div>
+            </div> */}
+
+            {open && (
+              <div className={styles.scripter_selector}>
+                <div className={styles.left_side}>
+                  <div className={styles.rech_input}>
+                    <img src={loop_fig} />
+                    <input placeholder="Recherche" />
+                  </div>
+                  <div className={styles.scripters_types}>
+                    {scripts_types.map((item, key) => {
+                      return (
+                        <div
+                          key={key}
+                          onClick={() => {
+                            handleSelect(item);
+                          }}
+                          className={styles.scripter_type}
+                        >
+                          <img src={item.img} />
+                          <span>{item.title}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
 const YoutubeScripter = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.UserReducer?.user);
+  const script = useSelector((state) => state.ScriptReducer);
+  const [form, setForm] = useState({
+    video_description: "",
+    search_term: "",
+    tone_of_voice: "excited",
+    language: "fr",
+    num_copies: 1,
+  });
+
+  const GetAllPossible = () => {
+    dispatch(GetAllScriptsYT(form, user));
+  };
+
+  const handle_change = (event) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
   return (
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.selects}>
-          <SelectFlag />
-          <SelectMood />
+          <SelectFlag onChange={handle_change} name="language" />
+          <SelectMood onChange={handle_change} name="tone_of_voice" />
         </div>
         <div className={styles.input}>
           <TextField
             isLabeled={true}
+            onChange={handle_change}
+            value={form.search_term}
+            name="search_term"
             label="Mots Clés"
             placeholder="EX : Neutral,Formal,Friendly"
           />
         </div>
         <div className={styles.input}>
-          <TextArea isLabeled={true} label="Description" />
+          <TextArea
+            onChange={handle_change}
+            value={form.video_description}
+            name="video_description"
+            isLabeled={true}
+            label="Description"
+          />
+        </div>
+        <div className={styles.button}>
+          <Red_Button loading={script?.payload} onClick={GetAllPossible}>
+            Générer
+          </Red_Button>
         </div>
       </div>
       <div className={styles.result}>
-        <Block label={"Titre : "} />
-        <Block
-          label={"Hooks : "}
-          parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
-          parag={`Forget the zoo! I'm taking you on a journey to meet some of the
-            wildest animals you've ever seen!\n2) Prepare to be amazed as I
-            explore the wildest corners of the world and find the most
-            incredible animals!\n3) Step right up and take a look at the
-            strangest and most exotic wildlife seen in this video! \n4) Ready to
-            be amazed? Let's go on an adventure to find the world’s most unusual
-            creatures!"`}
-        />
-        <Block
-          label={"Contenu vidéo : "}
-          parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
-          parag={`Les animaux du monde entier ont besoin d'aide. Dans cette vidéo,
-          nous explorons la situation critique des animaux dans les forêts et
-          comment nous pouvons aider à faire la différence. Nous discuterons
-          des effets de la déforestation et de la façon dont elle affecte la
-          faune de ces régions. Nous vous montrerons également comment vous
-          pouvez aider, par exemple en faisant des dons à des associations
-          caritatives ou en participant à des programmes de bénévolat.
-          Ensemble, nous pouvons faire la différence et sauver ces précieux
-          animaux !`}
-        />
+        <Block label={`Titre : ${script?.youtubetitles[0] || ""}`} />
 
         <Block
-          label={"Description vidéo : "}
+          label={"Paragraphe vidéo : "}
           parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
-          parag={`Les animaux du monde entier ont besoin d'aide. Dans cette vidéo,
-          nous explorons la situation critique des animaux dans les forêts et
-          comment nous pouvons aider à faire la différence. Nous discuterons
-          des effets de la déforestation et de la façon dont elle affecte la
-          faune de ces régions. Nous vous montrerons également comment vous
-          pouvez aider, par exemple en faisant des dons à des associations
-          caritatives ou en participant à des programmes de bénévolat.
-          Ensemble, nous pouvons faire la différence et sauver ces précieux
-          animaux !`}
+          parag={script?.paragraphwriter[0] || ""}
         />
+
+        {isPremium(user) && (
+          <Block
+            label={"Hooks : "}
+            parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
+            parag={script?.youtubehooks[0] || ""}
+          />
+        )}
+
+        {isPremium(user) && (
+          <Block
+            label={"Description vidéo : "}
+            parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
+            parag={script?.youtubedescriptions[0] || ""}
+          />
+        )}
+
+        {isPremium(user) && (
+          <Block
+            label={"Intro vidéo : "}
+            parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
+            parag={script?.youtubeintros[0] || ""}
+          />
+        )}
+
+        <div className={styles.button}>
+          <Red_Button onClick={GetAllPossible}>
+            <img src={reload_fig} alt="reload" />
+          </Red_Button>
+        </div>
       </div>
     </div>
   );
 };
 
 const TikTokScripter = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.UserReducer?.user);
+  const script = useSelector((state) => state.ScriptReducer);
+  const [form, setForm] = useState({
+    description: "",
+    language: "fr",
+    num_copies: 1,
+  });
+
+  const GetAllPossible = () => {
+    dispatch(GetAllScriptsTikTok(form, user));
+  };
+
+  const handle_change = (event) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
   return (
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.selects}>
-          <SelectFlag />
-          <SelectMood />
+          <SelectFlag onChange={handle_change} name="language" />
+          <SelectMood onChange={handle_change} name="tone_of_voice" />
         </div>
         <div className={styles.input}>
-          <TextArea isLabeled={true} label="Description" />
+          <TextArea
+            onChange={handle_change}
+            value={form.description}
+            name="description"
+            isLabeled={true}
+            label="Description"
+          />
+        </div>
+        <div className={styles.button}>
+          <Red_Button loading={script?.payload} onClick={GetAllPossible}>
+            Générer
+          </Red_Button>
         </div>
       </div>
       <div className={styles.result}>
         <Block
-          label={"Hooks : "}
+          label={"Description : "}
           parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
-          parag={`Forget the zoo! I'm taking you on a journey to meet some of the
-            wildest animals you've ever seen!\n2) Prepare to be amazed as I
-            explore the wildest corners of the world and find the most
-            incredible animals!\n3) Step right up and take a look at the
-            strangest and most exotic wildlife seen in this video! \n4) Ready to
-            be amazed? Let's go on an adventure to find the world’s most unusual
-            creatures!"`}
+          parag={script?.tiktokscriptdescription[0] || ""}
         />
+        <div className={styles.button}>
+          <Red_Button onClick={GetAllPossible}>
+            <img src={reload_fig} alt="reload" />
+          </Red_Button>
+        </div>
       </div>
     </div>
   );
 };
 
-const SelectFlag = () => {
+const SelectFlag = ({ onChange, name }) => {
   let items = [
-    { img: fr_flag, title: "French", value: "Fr" },
-    { img: en_flag, title: "English", value: "En" },
+    { img: fr_flag, title: "French", value: "fr" },
+    { img: en_flag, title: "English", value: "en" },
   ];
   const [select, setSelect] = useState(items[0]);
   const [open, setOpen] = useState(false);
@@ -223,6 +292,8 @@ const SelectFlag = () => {
 
   const handleSelect = (item) => {
     setSelect(item);
+    setOpen(false);
+    onChange({ target: { value: item.value, name } });
   };
 
   return (
@@ -257,11 +328,18 @@ const SelectFlag = () => {
   );
 };
 
-const SelectMood = () => {
+const SelectMood = ({ onChange, name }) => {
+  //
   let items = [
-    { title: "Friendly", value: "Friendly" },
-    { title: "Neutral", value: "Neutral" },
-    { title: "Formal", value: "Formal" },
+    { title: "Excited", value: "excited" },
+    { title: "Professional", value: "professional" },
+    { title: "Funny", value: "funny" },
+    { title: "Encouraging", value: "encouraging" },
+    { title: "Dramatic", value: "dramatic" },
+    { title: "Witty", value: "witty" },
+    { title: "Sarcastic", value: "sarcastic" },
+    { title: "Engaging", value: "engaging" },
+    { title: "Creative", value: "creative" },
   ];
   const [select, setSelect] = useState(items[0]);
   const [open, setOpen] = useState(false);
@@ -272,6 +350,8 @@ const SelectMood = () => {
 
   const handleSelect = (item) => {
     setSelect(item);
+    setOpen(false);
+    onChange({ target: { value: item.value, name } });
   };
 
   return (

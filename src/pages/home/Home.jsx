@@ -10,6 +10,7 @@ import Results from "./sections/our_goals/Results";
 import Stats from "./sections/our_stats/Stats";
 import OurPlans from "./sections/our_plans/OurPlans";
 import Reviews from "./sections/cients_reviews/Reviews";
+import Footer from "../../layouts/footer/Footer";
 
 function Home() {
   return (
@@ -22,6 +23,7 @@ function Home() {
       <Stats />
       <OurPlans />
       <Reviews />
+      <Footer />
     </div>
   );
 }

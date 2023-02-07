@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 
@@ -12,65 +13,53 @@ import Settings from "./pages/Settings/Settings";
 import Bibleotheque from "./pages/bibleo/Bibleothéque";
 import Contact from "./pages/Contact/Contact";
 
+import Toast from "./components/Toast/CustomToaster";
+
+import { useDispatch, useSelector } from "react-redux";
+import { GetUserByToken } from "./redux/User/user.actions";
+
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.UserReducer);
+  const [loading, setLoading] = useState(true);
+
+  const stop_loading = () => {
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    dispatch(GetUserByToken(stop_loading));
+  }, []);
+
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/home"
-            element={
-              <>
-                <Home />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/script"
-            element={
-              <>
-                <DashNav />
-                <Scripter />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <>
-                <DashNav />
-                <Settings />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/bibleo"
-            element={
-              <>
-                <DashNav />
-                <Bibleotheque />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <>
-                <DashNav />
-                <Contact />
-                <Footer />
-              </>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/*" element={<Navigate to="/home" />} />
-        </Routes>
-      </BrowserRouter>
+      <Toast />
+
+      {!loading && (
+        <div className="routes">
+          {user.is_connected ? (
+            <BrowserRouter>
+              <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/script" element={<Scripter />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/bibleo" element={<Bibleotheque />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/*" element={<Navigate to="/settings" />} />
+              </Routes>
+            </BrowserRouter>
+          ) : (
+            <BrowserRouter>
+              <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/*" element={<Navigate to="/home" />} />
+              </Routes>
+            </BrowserRouter>
+          )}
+        </div>
+      )}
     </div>
   );
 }

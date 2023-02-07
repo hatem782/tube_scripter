@@ -5,29 +5,35 @@ import youtube from "../../assets/svg/script/youtube.svg";
 import video_scripter from "../../assets/svg/script/video_scripter.svg";
 
 import { NavLink } from "react-router-dom";
+import DashNav from "../../layouts/dash-navbar/DashNav";
+import Footer from "../../layouts/footer/Footer";
 
 const Bibleotheque = () => {
   return (
-    <div className={styles.main}>
-      <h1>Bibliothèque</h1>
-      <div className={styles.bibleo}>
-        <h2>
-          <NavLink to="/script"> Nouvelle </NavLink>{" "}
-        </h2>
-        <div className={styles.cards}>
-          <Card
-            type="yt"
-            description={`Des descriptions YouTube accrocheuses et convaincantes qui permettent
+    <>
+      <DashNav />
+      <div className={styles.main}>
+        <h1>Bibliothèque</h1>
+        <div className={styles.bibleo}>
+          <h2>
+            <NavLink to="/script"> Nouvelle </NavLink>{" "}
+          </h2>
+          <div className={styles.cards}>
+            <Card
+              type="yt"
+              description={`Des descriptions YouTube accrocheuses et convaincantes qui permettent
           de mieux classer vo vidéos`}
-          />
-          <Card
-            type="vs"
-            description={`Des descriptions YouTube accrocheuses et convaincantes qui permettent
+            />
+            <Card
+              type="vs"
+              description={`Des descriptions YouTube accrocheuses et convaincantes qui permettent
           de mieux classer vo vidéos`}
-          />
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

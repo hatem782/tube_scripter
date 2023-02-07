@@ -11,10 +11,10 @@ export function White_Button({ children, onClick }) {
   );
 }
 
-export function Red_Button({ children, onClick }) {
+export function Red_Button({ children, onClick, loading = false }) {
   return (
-    <button className={styles.red_button} onClick={onClick}>
-      {children}
+    <button disabled={loading} className={styles.red_button} onClick={onClick}>
+      {loading ? "Loading..." : children}
     </button>
   );
 }

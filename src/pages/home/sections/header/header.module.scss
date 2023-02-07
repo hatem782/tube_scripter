@@ -36,6 +36,7 @@
         margin: 0px 25px;
         text-decoration: none;
         cursor: pointer;
+        font-family: "Montserrat";
       }
 
       button {
@@ -52,24 +53,26 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    font-family: "Montserrat";
 
     h1 {
       font-size: 105px;
       font-weight: 600;
       margin: 0px;
       line-height: 1;
+      font-family: "Montserrat";
     }
     h2 {
       font-size: 38px;
       font-weight: 600;
       margin: 0px;
+      font-family: "Montserrat";
     }
 
     p {
       font-size: 32px;
       font-weight: 400;
       letter-spacing: 5px;
+      font-family: "Montserrat";
       span {
         color: red;
       }

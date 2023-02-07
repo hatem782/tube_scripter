@@ -41,7 +41,22 @@ const Plan = ({ plan }) => {
           );
         })}
         <h3>{plan.price}</h3>
-        <button>Choisir</button>
+
+        {plan.type !=="free" &&  <button>
+          <form 
+            action="http://localhost:3005/api/payment/create-checkout-session"
+            method="POST"
+          >
+            <input type="hidden" name="lookup_key" value={plan.type} />
+            <input
+              type="hidden"
+              name="email"
+              value="hatembenechikh100@gmail.com"
+            />
+            <button type="submit">Choisir</button>
+          </form>
+        </button>}
+
       </div>
     </div>
   );

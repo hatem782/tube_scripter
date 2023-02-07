@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { TextField } from "../../components/inputs/TextField";
 import { White_Button } from "../../components/buttons/Buttons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import styles from "./Index.module.scss";
 
@@ -11,7 +11,38 @@ import google from "../../assets/svg/google.svg";
 import facebook from "../../assets/svg/facebook.svg";
 import twitter from "../../assets/svg/twitter.svg";
 
+import { useDispatch } from "react-redux";
+import { ActionRegister } from "../../redux/User/user.actions";
+import { toast } from "react-hot-toast";
+
 const Register = () => {
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    conf_password: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const succ = () => {
+    navigate("/login");
+  };
+
+  const handleSubmit = () => {
+    if (user.conf_password !== user.password) {
+      toast.error("passwords are not matching !");
+      return;
+    }
+    dispatch(ActionRegister(user, succ));
+  };
+
+  const handle_change = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.section}>
@@ -21,15 +52,47 @@ const Register = () => {
         <div className={styles.form}>
           <h3 className={styles.title}>Create an account</h3>
 
-          <TextField type="text" placeholder="First name" />
-          <TextField type="text" placeholder="Last name" />
-          <TextField type="text" placeholder="Email" />
+          <TextField
+            onChange={handle_change}
+            type="text"
+            name="firstName"
+            value={user.firstName}
+            placeholder="First name"
+          />
+          <TextField
+            onChange={handle_change}
+            type="text"
+            name="lastName"
+            value={user.lastName}
+            placeholder="Last name"
+          />
+          <TextField
+            onChange={handle_change}
+            type="text"
+            name="email"
+            value={user.email}
+            placeholder="Email"
+          />
           <div className={styles.grid2}>
-            <TextField type="password" placeholder="Password" />
-            <TextField type="password" placeholder="confirm Password" />
+            <TextField
+              onChange={handle_change}
+              type="password"
+              name="password"
+              value={user.password}
+              className={styles.input}
+              placeholder="Password"
+            />
+            <TextField
+              onChange={handle_change}
+              type="password"
+              name="conf_password"
+              value={user.conf_password}
+              className={styles.input}
+              placeholder="confirm Password"
+            />
           </div>
 
-          <White_Button onClick={() => {}}>Create an account</White_Button>
+          <White_Button onClick={handleSubmit}>Create an account</White_Button>
 
           <div className={styles.alt_login}>
             <h4> Or login with </h4>

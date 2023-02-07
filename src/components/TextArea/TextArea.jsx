@@ -38,6 +38,9 @@ export function TextArea(props) {
       <div className={styles.input}>
         <textarea
           rows={rows}
+          name={name}
+          value={value}
+          onChange={onChange}
           type={is_pass ? (show ? "text" : "password") : "text"}
           placeholder={placeholder}
         />

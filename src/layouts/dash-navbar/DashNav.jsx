@@ -7,7 +7,10 @@ import select_arrow from "../../assets/svg/navbar/select_.svg";
 import setting from "../../assets/svg/navbar/setting.svg";
 import sign_out from "../../assets/svg/navbar/sign-out.svg";
 import user_img from "../../assets/images/user2.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { Disconnect } from "../../redux/User/user.actions";
 
 function DashNav() {
   return (
@@ -38,12 +41,17 @@ function DashNav() {
 
 const Select = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const Deconnection = () => {};
+  const disconnect = () => {
+    navigate("/home");
+    dispatch(Disconnect());
+  };
 
   return (
     <div className={styles.select}>
@@ -57,7 +65,7 @@ const Select = () => {
               <img src={setting} alt="settings" /> <span>Paramétre</span>
             </div>
           </NavLink>
-          <div onClick={Deconnection} className={styles.item}>
+          <div onClick={disconnect} className={styles.item}>
             <img src={sign_out} alt="Déconnection" /> <span>Déconnection</span>
           </div>
         </div>

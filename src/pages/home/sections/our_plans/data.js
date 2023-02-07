@@ -11,6 +11,7 @@ export const plans = [
       { label: "Sample Text Here", available: false },
     ],
     price: "Gratuit",
+    type: "free",
   },
   {
     title: "Standard",
@@ -24,6 +25,7 @@ export const plans = [
       { label: "Sample Text Here", available: false },
     ],
     price: "342£",
+    type: "starter",
   },
   {
     title: "Premuim",
@@ -37,5 +39,6 @@ export const plans = [
       { label: "Sample Text Here", available: true },
     ],
     price: "342£",
+    type: "premium",
   },
 ];
