@@ -78,21 +78,29 @@ function Settings() {
 }
 
 const Profile = () => {
+  const user = useSelector((state) => state.UserReducer?.user);
   return (
     <div className={styles.profile}>
       <div className={styles.info}>
         <h4>Nom&Prénom</h4>
-        <h2>Amanie ssame</h2>
+        <h2>
+          {user.firstName} {user.lastName}
+        </h2>
       </div>
 
       <div className={styles.info}>
         <h4>Adresse e-mail</h4>
-        <h2>Amaniesame@gmail.com</h2>
+        <h2>{user.email}</h2>
       </div>
 
       <div className={styles.info}>
         <h4>Language</h4>
         <h2>Français</h2>
+      </div>
+
+      <div className={styles.info}>
+        <h4>Nombre des mots</h4>
+        <h2>{user.nbr_words}</h2>
       </div>
 
       <div className={styles.info}>
