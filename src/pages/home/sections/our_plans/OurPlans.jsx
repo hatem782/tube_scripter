@@ -20,7 +20,6 @@ function OurPlans() {
       <h1>
         {text.title} <span> {text.choose} </span>
       </h1>
-      <p>{text.desc}</p>
 
       <div className={styles.plans}>
         {text.plan.map((plan, key) => {

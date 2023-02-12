@@ -1,33 +1,35 @@
 const texts = {
   en: {
-    title: "Millions of people become better writers",
+    title: "Millions of People Become Top Content Creators",
+    click:"Create a script",
     circle1: {
       title: "Time saved",
-      parag: "Millions of people trust the time saver",
+      
     },
     circle2: {
-      title: "Million",
-      parag: "Millions of people trust the time saver",
+      title: "script created",
+      
     },
     circle3: {
-      title: "Words",
-      parag: "Millions of people trust the time saver",
+      title: "Words generated",
+      
     },
   },
 
   fr: {
-    title: "Des millions de personnes deviennent de meilleurs écrivains",
+    title: "Des millions de personnes deviennent des meilleurs créateurs de contenu.",
+    click:"créer un script",
     circle1: {
       title: "Temps gagné",
-      parag: "Des millions de personnes font confiance au gain de temps",
+     
     },
     circle2: {
-      title: "Million",
-      parag: "Des millions de personnes font confiance au gain de temps",
+      title: "Script crée",
+     
     },
     circle3: {
-      title: "Mots",
-      parag: "Des millions de personnes font confiance au gain de temps",
+      title: "Mots généré",
+     
     },
   },
 };

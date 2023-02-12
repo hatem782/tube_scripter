@@ -1,14 +1,14 @@
 const texts = {
   en: {
     GENERATED_YOUR_FIRST_SCRIPT: "GENERATED YOUR FIRST SCRIPT",
-    try_tubescripter: "Try Tube Scripter for free in just a few clicks",
-    How_it_works: "How it works",
+    try_tubescripter: "Try Tube Scripter for free in just a few clicks.",
+    How_it_works: "Try for free",
   },
 
   fr: {
     GENERATED_YOUR_FIRST_SCRIPT: "GÉNÉRÉ VOTRE PREMIER SCRIPT",
-    try_tubescripter: "Essayer Tube Scripter gratuitement en quelques clique.",
-    How_it_works: "Comment ça fonctionne",
+    try_tubescripter: "Essayer Tube Scripter gratuitement en quelques cliques.",
+    How_it_works: "Essayer gratuitement",
   },
 };
 

@@ -6,7 +6,7 @@ const texts = {
 
   fr: {
     title_p1: "1000+ Clients",
-    title_p2: "Adorent",
+    title_p2: "adorent",
   },
 };
 

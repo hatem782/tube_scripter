@@ -13,14 +13,20 @@
 
   .bibleo {
     padding: 60px 240px;
+    .textSize{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    
     h2 {
-      font-size: 30px;
+      font-size: 36px;
       font-weight: 400;
       margin: 0px 0px 60px 0px;
+      font-weight: 600;
       font-family: "Montserrat";
       color: black;
       cursor: pointer;
-
+    }
       a {
         text-decoration: none;
         color: black;
@@ -37,15 +43,14 @@
 }
 
 .card {
-  width: 30%;
+  width: 50%;
   margin: 0px 3% 0px 0px;
   padding: 40px 30px;
-  aspect-ratio: 1/0.8;
   border: solid 1px rgba($color: #707070, $alpha: 0.4);
   border-radius: 30px;
   cursor: pointer;
   overflow: hidden;
-
+  height: auto;
   .img_type {
     height: 60px;
     width: 70px;
@@ -84,5 +89,10 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+}
+@media only screen and  (max-width: 1605px){
+  .bibleo {
+    padding: 60px 80px!important;
   }
 }

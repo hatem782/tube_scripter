@@ -22,6 +22,10 @@
       color: black;
       font-weight: 700;
     }
+      .blockBtn{
+        width: 100%;
+        margin-top: 1.5rem;
+      }
     p {
       text-align: justify;
       font-size: 25px;
@@ -29,7 +33,7 @@
       color: #676767;
       margin: 0px;
       line-height: 50px;
-
+      width: 75%;
       span {
         display: block;
       }
@@ -38,5 +42,10 @@
 
   img {
     width: 40%;
+  }
+}
+@media only screen and  (max-width: 1605px){
+  .details {
+    padding: 0px 0px 0px 60px!important;
   }
 }

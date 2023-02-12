@@ -14,7 +14,7 @@ const texts = {
     Create_a_script: "Créer un script ",
     Prices: "Tarifs",
     Get_Premium: "Obtenir Premium",
-    WRITE: "ECRIVEZ",
+    WRITE: "ÉCRIVEZ",
     THE_BEST_SCRIPTS: "LES MEILLEURS SCRIPTS",
     FASTER: "PLUS RAPIDEMENT.",
     To_Profile: "Dashboard",

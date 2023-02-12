@@ -3,20 +3,20 @@ import { plans_en, plans_fr } from "./data";
 const texts = {
   en: {
     plan: plans_en,
-    title: "Several options to ",
+    title: "Ready to  ",
     desc: `Tube Scripter is a specialized script generator
     in YouTube videos. This tool is designed to be used
     on any video theme.`,
-    choose: "Choose",
+    choose: "start ?",
   },
 
   fr: {
     plan: plans_fr,
-    title: "Plusieurs options à ",
+    title: "Prêt à  ",
     desc: `Tube Scripter est un générateur de scripts spécialisé 
     dans les vidéos YouTube .Cet outil est conçu pour être utilizer 
     sur n'importe quelle thèmes de vidéos.`,
-    choose: "Choisir",
+    choose: "commencer ?",
   },
 };
 

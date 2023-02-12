@@ -32,6 +32,7 @@ import {
 
 import { useSelector } from "react-redux";
 import { isPremium, isStandar } from "../../custom/user.access";
+import keys from "../../redux/Scripter/scripter.keys";
 
 function Scripter() {
   const lang = useSelector((state) => state?.LangReducer?.lang);
@@ -151,6 +152,12 @@ const YoutubeScripter = ({ text }) => {
     setForm({ ...form, [name]: value });
   };
 
+  const [isModifyBtn,setIsModifyBtn] = useState(false)
+
+  useEffect(()=>{
+    console.log(isModifyBtn)
+  },[isModifyBtn])
+
   return (
     <div className={styles.scripter}>
       <div className={styles.form}>
@@ -162,6 +169,16 @@ const YoutubeScripter = ({ text }) => {
             name="tone_of_voice"
           />
         </div>
+        <div className={styles.selects}  style={{marginTop:"1.5rem"}}>
+
+          <SelectTime 
+          onChange={handle_change}
+          text={text}
+          name="tone_of_voice"
+         
+          />
+
+        </div>
         <div className={styles.input}>
           <TextField
             isLabeled={true}
@@ -169,7 +186,7 @@ const YoutubeScripter = ({ text }) => {
             value={form.search_term}
             name="search_term"
             label={text.Key_words}
-            placeholder="EX : Neutral,Formal,Friendly"
+            placeholder="EX : Neutral Formal Friendly"
           />
         </div>
         <div className={styles.input}>
@@ -188,42 +205,51 @@ const YoutubeScripter = ({ text }) => {
         </div>
       </div>
       <div className={styles.result}>
-        <Block label={`${text.Title} : ${script?.youtubetitles[0] || ""}`} />
+        <Block
+          isBtn={isModifyBtn} 
+        label={`${text.Title} : ${script?.youtubetitles[0]   || ""}`}  />
 
         <Block
+          isBtn={isModifyBtn}
           label={text.Video_paragraph}
-          parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
           parag={script?.paragraphwriter[0] || ""}
         />
 
         {isPremium(user) && (
           <Block
+            isBtn={isModifyBtn}
             label={text.Hooks}
-            parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
             parag={script?.youtubehooks[0] || ""}
           />
         )}
 
         {isPremium(user) && (
           <Block
+            isBtn={isModifyBtn}
             label={text.Video_description}
-            parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
             parag={script?.youtubedescriptions[0] || ""}
           />
         )}
 
         {isPremium(user) && (
           <Block
+            isBtn={isModifyBtn}
             label={text.Video_intro}
-            parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
             parag={script?.youtubeintros[0] || ""}
+
           />
         )}
 
         <div className={styles.button}>
+          <div style={{marginRight:"1rem"}}>
+          <Red_Button onClick={e => setIsModifyBtn(!isModifyBtn)}>
+              <i class="fa-solid fa-pen" style={{fontSize:"1.5em"}}></i>          
+            </Red_Button>
+          </div>
           <Red_Button onClick={GetAllPossible}>
             <img src={reload_fig} alt="reload" />
           </Red_Button>
+          
         </div>
       </div>
     </div>
@@ -259,6 +285,18 @@ const TikTokScripter = ({ text }) => {
             text={text}
             name="tone_of_voice"
           />
+
+
+        </div>
+        <div className={styles.selects}  style={{marginTop:"1.5rem"}}>
+
+          <SelectTime 
+          onChange={handle_change}
+          text={text}
+          name="tone_of_voice"
+         
+          />
+
         </div>
         <div className={styles.input}>
           <TextArea
@@ -278,13 +316,18 @@ const TikTokScripter = ({ text }) => {
       <div className={styles.result}>
         <Block
           label={text.Description}
-          parag_stat="87/ 448 caractères, il y a 1 jour 10 minutes"
           parag={script?.tiktokscriptdescription[0] || ""}
         />
         <div className={styles.button}>
+        <div style={{marginRight:"1rem"}}>
+        <Red_Button>
+            <i class="fa-solid fa-pen" style={{fontSize:"1.5em"}}></i>          
+          </Red_Button>
+        </div>
           <Red_Button onClick={GetAllPossible}>
             <img src={reload_fig} alt="reload" />
           </Red_Button>
+          
         </div>
       </div>
     </div>
@@ -359,7 +402,51 @@ const SelectMood = ({ onChange, name, text }) => {
 
   return (
     <div className={styles.select}>
-      <label>Mood</label>
+      <label>{text.mood}</label>
+      <div className={styles.header} onClick={handle_open}>
+        <span>{select.title}</span>
+        <img src={arrow} className={styles.arrow} />
+      </div>
+
+      {open && (
+        <div className={styles.hidden}>
+          {items.map((item, key) => {
+            return (
+              <div
+                key={key}
+                onClick={() => {
+                  handleSelect(item);
+                }}
+                className={styles.item}
+              >
+                <span>{item.title}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+const SelectTime = ({ onChange, name, text }) => {
+  //
+  let items = text.minutes;
+  const [select, setSelect] = useState(items[0]);
+  const [open, setOpen] = useState(false);
+
+  const handle_open = () => {
+    setOpen(!open);
+  };
+
+  const handleSelect = (item) => {
+    setSelect(item);
+    setOpen(false);
+    onChange({ target: { value: item.value, name } });
+  };
+
+  return (
+    <div className={styles.select}>
+      <label>{text.mood}</label>
       <div className={styles.header} onClick={handle_open}>
         <span>{select.title}</span>
         <img src={arrow} className={styles.arrow} />
@@ -386,34 +473,74 @@ const SelectMood = ({ onChange, name, text }) => {
   );
 };
 
-const Block = ({ label, parag, parag_stat }) => {
+const Block = ({ label, parag, parag_stat,isBtn }) => {
+
+  
+  let dispatch = useDispatch()
+
+  function dispatchText(){
+    alert(label)
+    switch(label){
+      case 'Title' : 
+        dispatch({
+          type: keys.youtubetitles,
+          value: newState
+        });
+        break;
+      case 'Script :' : 
+        dispatch({
+          type: keys.paragraphwriter,
+          value: newState
+        });
+        break;
+        case 'Hooks' : 
+        dispatch({
+          type: keys.youtubehooks,
+          value: newState
+        });
+        break;
+        case 'Video description :' : 
+        dispatch({
+          type: keys.youtubedescriptions,
+          value: newState
+        });
+        break;
+        case 'Video intro' : 
+        dispatch({
+          type: keys.youtubeintros,
+          value: newState
+        });
+        break;
+        default:
+          break;
+        
+    }
+  }
+  
+  const [newState,setnewState]= useState(null)
+
+  useEffect(()=>{
+    setnewState(parag)
+  },[parag])
+
+
+
   return (
     <div className={styles.block}>
       <h1>{label} </h1>
-      {parag && <p>{parag}</p>}
+      {!isBtn ? <>{newState && <p>{ newState}</p>} </>:<>{parag && <textarea value={newState} onChange={e => setnewState(e.target.value)} rows='5' className={styles.btninput}></textarea>}</> }
       {parag && (
         <div className={styles.bottom}>
-          <span className={styles.stat_parag}>{parag_stat}</span>
+          <span className={styles.stat_parag}></span>
 
           <div className={styles.stars_and_btns}>
-            <div className={styles.stars}>
-              <img src={star_fig} alt="star" />
-              <img src={star_fig} alt="star" />
-              <img src={star_fig} alt="star" />
-              <img src={star_fig} alt="star" />
-              <img src={star_fig} alt="star" />
-            </div>
+
             <div className={styles.btns}>
               <div className={styles.img_cont_btn}>
                 <img src={copy_fig} alt="btn" />
               </div>
-              <div className={styles.img_cont_btn}>
-                <img src={delete_fig} alt="btn" />
-              </div>
-              <div className={styles.img_cont_btn}>
-                <img src={edit_fig} alt="btn" />
-              </div>
-              <div className={styles.img_cont_btn}>
+
+              <div className={styles.img_cont_btn} onClick={dispatchText}>
                 <img src={save_fig} alt="btn" />
               </div>
             </div>

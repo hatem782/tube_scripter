@@ -99,7 +99,7 @@
     justify-content: center;
 
     .available {
-      height: 30px;
+      height: 25px;
     }
 
     .not_available {
@@ -110,5 +110,10 @@
   span {
     font-size: 20px;
     font-weight: 400;
+  }
+}
+@media only screen and  (max-width: 1605px){
+  .main {
+    padding: 100px 140px;
   }
 }
