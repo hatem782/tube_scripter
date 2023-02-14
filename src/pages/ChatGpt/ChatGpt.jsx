@@ -13,10 +13,11 @@ import Footer from "../../layouts/footer/Footer";
 
 import { useSelector } from "react-redux";
 
-// import TikTokGpt from "./scripts/TikTokGpt";
+import TikTokGpt from "./chats/TikTokGpt";
 import YoutubeGpt from "./chats/YoutubeGpt";
 
 function ChatGpt() {
+  const script = useSelector((state) => state.ScriptReducer);
   const lang = useSelector((state) => state?.LangReducer?.lang);
   const [text, setText] = useState(GetText(lang));
   useEffect(() => {
@@ -37,6 +38,14 @@ function ChatGpt() {
   ];
   const [open, setOpen] = useState(false);
   const [scrp_type, setScrp_type] = useState(scripts_types[0]);
+
+  useEffect(() => {
+    if (script.tiktoktitle.length > 0) {
+      setScrp_type(scripts_types[1]);
+    } else {
+      setScrp_type(scripts_types[0]);
+    }
+  }, [script]);
 
   const handleSelect = (type) => {
     setScrp_type(type);
@@ -71,7 +80,7 @@ function ChatGpt() {
             </div>
             <div className={styles.body}>
               {scrp_type.value === "yt" && <YoutubeGpt text={text} />}
-              {/* {scrp_type.value === "vs" && <TikTokGpt text={text} />} */}
+              {scrp_type.value === "vs" && <TikTokGpt text={text} />}
             </div>
 
             {open && (

@@ -6,6 +6,9 @@ const keys = {
   youtubedescription: "youtubedescription",
   content_scripter: "content_scripter",
   tiktokscriptdescription: "tiktokscriptdescription",
+  tiktoktitle: "tiktoktitle",
+  tiktokintro: "tiktokintro",
+  tiktokhooks: "tiktokhooks",
   youtube_gpt: "youtube_gpt",
 };
 

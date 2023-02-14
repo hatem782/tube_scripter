@@ -25,11 +25,16 @@ let minutes = [
   { title: "25-30 minutes", value: "a-4" },
 ];
 
+let Tik_minutes = [
+  { title: "1-3 minutes", value: "t-1" },
+  { title: "4-6 minutes", value: "t-2" },
+  { title: "7-9 minutes", value: "t-3" },
+];
+
 let minutesTk = [
   { title: "30 seconds", value: "t-1" },
   { title: "1 minute", value: "t-2" },
   { title: "1 minute 30 seconds", value: "t-3" },
-
 ];
 
 const texts = {
@@ -39,7 +44,7 @@ const texts = {
     Key_words: "Key words",
     Description: "Description :",
     Generate: "Generate",
-    EditChat:"Edit with TubeChat",
+    EditChat: "Edit with TubeChat",
     Title: "Title",
     Video_paragraph: "Script :",
     Hooks: "Hooks : ",
@@ -59,12 +64,13 @@ const texts = {
     Content: "Script",
     Reload: " Reload",
     textarea: "History of McDonald's",
+    Tik_minutes: Tik_minutes,
   },
 
   fr: {
     YouTube_Scripter: "YouTube  Script",
     Tiktok_Scripter: "Tiktok  Script",
-    EditChat:"mdifier avec TubeChat",
+    EditChat: "mdifier avec TubeChat",
 
     Key_words: "Mots Clés",
     Description: "Description :",
@@ -88,6 +94,7 @@ const texts = {
     Content: "Script",
     Reload: " Relancer",
     textarea: "histoire de  McDonald's",
+    Tik_minutes: Tik_minutes,
   },
 };
 

@@ -35,12 +35,22 @@ const YoutubeGpt = ({ text }) => {
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
-  useEffect(()=>{
-    if(script.youtubetitle.length> 0 &&script.youtubedescription.length> 0 &&script.content_scripter.length> 0  )
-    setForm({
-      text:script.youtubetitle + '\n\n'+ script.youtubedescription +'\n\n' +script.content_scripter + '\n\n',
-    })
-  },[script])
+  useEffect(() => {
+    if (
+      script.youtubetitle.length > 0 &&
+      script.youtubedescription.length > 0 &&
+      script.content_scripter.length > 0
+    )
+      setForm({
+        text:
+          script.youtubetitle +
+          "\n\n" +
+          script.youtubedescription +
+          "\n\n" +
+          script.content_scripter +
+          "\n\n",
+      });
+  }, [script]);
 
   return (
     <div className={styles.scripter}>
@@ -54,7 +64,7 @@ const YoutubeGpt = ({ text }) => {
               isLabeled={true}
               label={text.Description}
               placeholder={text.textarea}
-              rows={16}
+              rows={14}
             />
           </div>
         </div>

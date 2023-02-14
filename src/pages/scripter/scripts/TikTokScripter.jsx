@@ -11,6 +11,8 @@ import Block from "../../../components/Block/Block";
 
 import styles from "../scripter.module.scss";
 
+import { useNavigate } from "react-router-dom";
+
 const TikTokScripter = ({ text }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserReducer?.user);
@@ -19,7 +21,11 @@ const TikTokScripter = ({ text }) => {
     description: "",
     language: "fr",
     num_copies: 1,
+    timeline: "t-1",
+    tone_of_voice: "excited",
   });
+
+  let navigate = useNavigate();
 
   const GetAllPossible = () => {
     dispatch(GetAllScriptsTikTok(form, user));
@@ -53,10 +59,10 @@ const TikTokScripter = ({ text }) => {
           <div className={styles.selects} style={{ marginTop: "1.5rem" }}>
             <Select
               onChange={handle_change}
-              name="duration"
+              name="timeline"
               with_img={false}
               label={text.duration}
-              items={text.minutes}
+              items={text.Tik_minutes}
             />
           </div>
           <div className={styles.input}>
@@ -71,18 +77,40 @@ const TikTokScripter = ({ text }) => {
           </div>
         </div>
         <div className={styles.button}>
-          <Red_Button loading={script?.payload} onClick={GetAllPossible}>
-            {text.Generate}
-          </Red_Button>
+          <div className={styles.btn}>
+            <Red_Button onClick={(e) => navigate("/tubeChat")}>
+              {text.EditChat}
+            </Red_Button>
+          </div>
+          <div className={styles.btn}>
+            <Red_Button loading={script?.payload} onClick={GetAllPossible}>
+              {text.Generate}
+            </Red_Button>
+          </div>
         </div>
       </div>
       <div className={styles.result}>
         <div className={styles.result_body}>
           <Block
-            isBtn={false}
+            name="tiktoktitle"
+            label={`${text.Title} : ${script?.tiktoktitle || ""}`}
+          />
+          <Block
             label={text.Description}
-            name=""
-            parag={script?.tiktokscriptdescription[0] || ""}
+            name="tiktokscriptdescription"
+            parag={script?.tiktokscriptdescription || ""}
+          />
+
+          <Block
+            label={text.Video_intro}
+            name="tiktokintro"
+            parag={script?.tiktokintro || ""}
+          />
+
+          <Block
+            label={text.Hooks}
+            name="tiktokhooks"
+            parag={script?.tiktokhooks || ""}
           />
         </div>
         <div className={styles.button}>

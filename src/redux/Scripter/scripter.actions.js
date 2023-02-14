@@ -80,26 +80,6 @@ const GetAllScriptsYT = (data, user) => {
         });
       }
 
-      // // TO WRITE INTRO
-      // const response3 = await axios.post(`/api/writeSonicApi/youtubeintros`, {
-      //   ...data,
-      //   video_title: titles[0],
-      // });
-      // dispatch({
-      //   type: keys.youtubeintros,
-      //   value: response3.data.data[0].text.split("\n"),
-      // });
-
-      // // TO WRITE HOOK
-      // const response4 = await axios.post(`/api/writeSonicApi/youtubehooks`, {
-      //   ...data,
-      //   video_title: titles[0],
-      // });
-      // dispatch({
-      //   type: keys.youtubehooks,
-      //   value: response4.data.data[0].text.split("\n"),
-      // });
-
       dispatch({
         type: keys.payload,
         value: false,
@@ -115,7 +95,7 @@ const GetAllScriptsYT = (data, user) => {
   };
 };
 
-const GetAllScriptsTikTok = (data, user) => {
+const GetAllScriptsTikTok = (data) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -124,17 +104,55 @@ const GetAllScriptsTikTok = (data, user) => {
       });
 
       // TO WRITE TITLE
-      const response1 = await axios.post(
+      const response1 = await axios.post(`/api/writeSonicApi/youtubetitles`, {
+        ...data,
+        video_description: data.description,
+        search_term: data.description,
+      });
+      let title = response1.data.data[0].text.split("\n")[0]?.replace("- ", "");
+      dispatch({
+        type: keys.tiktoktitle,
+        value: title,
+      });
+      console.log(response1); // cv
+      // TO WRITE Description
+      const response2 = await axios.post(
         `/api/writeSonicApi/tiktokscriptdescription`,
         {
           ...data,
         }
       );
-      let descs = response1.data.data[0].text.split("\n");
+      console.log(response2); // cv
+      let descs = response2.data;
       dispatch({
         type: keys.tiktokscriptdescription,
         value: descs,
       });
+
+      // TO WRITE INTRO
+      const response3 = await axios.post(`/api/writeSonicApi/youtubeintros`, {
+        ...data,
+        video_title: title,
+        search_term: title,
+      });
+      console.log(response3);
+      dispatch({
+        type: keys.tiktokintro,
+        value: response3.data.data[0].text.split("\n")[0]?.replace("- ", ""),
+      });
+
+      // TO WRITE HOOK
+      const response4 = await axios.post(`/api/writeSonicApi/youtubehooks`, {
+        ...data,
+        video_title: title,
+        search_term: title,
+      });
+      console.log(response4);
+      dispatch({
+        type: keys.tiktokhooks,
+        value: response4.data.data[0].text.split("\n")[0]?.replace("- ", ""),
+      });
+
       dispatch({
         type: keys.payload,
         value: false,

@@ -5,7 +5,10 @@ export const InitialState = {
   youtubetitle: "",
   youtubedescription: "",
   content_scripter: "",
-  tiktokscriptdescription: [],
+  tiktokscriptdescription: "",
+  tiktoktitle: "",
+  tiktokintro: "",
+  tiktokhooks: "",
   youtube_gpt: "",
 };
 
@@ -23,6 +26,12 @@ export const ScriptReducer = (state = { ...InitialState }, action) => {
       return { ...state, youtubedescription: action.value };
     case keys.tiktokscriptdescription:
       return { ...state, tiktokscriptdescription: action.value };
+    case keys.tiktoktitle:
+      return { ...state, tiktoktitle: action.value };
+    case keys.tiktokintro:
+      return { ...state, tiktokintro: action.value };
+    case keys.tiktokhooks:
+      return { ...state, tiktokhooks: action.value };
     case keys.youtube_gpt:
       return { ...state, youtube_gpt: action.value };
     case keys.payload:
