@@ -18,6 +18,7 @@ import Toast from "./components/Toast/CustomToaster";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserByToken } from "./redux/User/user.actions";
 import { GetLangByToken } from "./redux/lang/lang.actions";
+import ChatGpt from "./pages/ChatGpt/ChatGpt";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,8 @@ function App() {
               <Routes>
                 <Route path="/home" element={<Home />} />
                 <Route path="/script" element={<Scripter />} />
+                <Route path="/script/:_id" element={<Scripter />} />
+                <Route path="/chatgpt" element={<ChatGpt />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/bibleo" element={<Bibleotheque />} />
                 <Route path="/contact" element={<Contact />} />

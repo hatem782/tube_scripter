@@ -33,6 +33,9 @@ function DashNav() {
           <NavLink to="/script"> {text.Script} </NavLink>
         </span>
         <span className={styles.link}>
+          <NavLink to="/chatgpt"> {text.ChatGpt} </NavLink>
+        </span>
+        <span className={styles.link}>
           <NavLink to="/bibleo"> {text.Library} </NavLink>
         </span>
         <span className={styles.link}>

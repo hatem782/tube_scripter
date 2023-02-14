@@ -2,6 +2,7 @@ const texts = {
   en: {
     home: "Home",
     Script: "Script",
+    ChatGpt: "ChatGpt",
     Library: "Library",
     Contact: "Contact",
     Setting: "Setting",
@@ -11,6 +12,7 @@ const texts = {
   fr: {
     home: "Accueil",
     Script: "Scripte",
+    ChatGpt: "ChatGpt",
     Library: "Bibleothéque",
     Contact: "Contact",
     Setting: "Paramétre",

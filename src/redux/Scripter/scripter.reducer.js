@@ -2,12 +2,11 @@ import keys from "./scripter.keys";
 
 export const InitialState = {
   payload: false,
-  youtubetitles: [],
-  paragraphwriter: [],
-  youtubeintros: [],
-  youtubehooks: [],
-  youtubedescriptions: [],
+  youtubetitle: "",
+  youtubedescription: "",
+  content_scripter: "",
   tiktokscriptdescription: [],
+  youtube_gpt: "",
 };
 
 export const ScriptReducer = (state = { ...InitialState }, action) => {
@@ -16,18 +15,16 @@ export const ScriptReducer = (state = { ...InitialState }, action) => {
       return { ...action.value };
     case keys.update_script:
       return { ...state, update_script: action.value };
-    case keys.youtubetitles:
-      return { ...state, youtubetitles: action.value };
-    case keys.paragraphwriter:
-      return { ...state, paragraphwriter: action.value };
-    case keys.youtubeintros:
-      return { ...state, youtubeintros: action.value };
-    case keys.youtubehooks:
-      return { ...state, youtubehooks: action.value };
-    case keys.youtubedescriptions:
-      return { ...state, youtubedescriptions: action.value };
-      case keys.tiktokscriptdescription:
-        return { ...state, tiktokscriptdescription: action.value };
+    case keys.youtubetitle:
+      return { ...state, youtubetitle: action.value };
+    case keys.content_scripter:
+      return { ...state, content_scripter: action.value };
+    case keys.youtubedescription:
+      return { ...state, youtubedescription: action.value };
+    case keys.tiktokscriptdescription:
+      return { ...state, tiktokscriptdescription: action.value };
+    case keys.youtube_gpt:
+      return { ...state, youtube_gpt: action.value };
     case keys.payload:
       return { ...state, payload: action.value };
     default:

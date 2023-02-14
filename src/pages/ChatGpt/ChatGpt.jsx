@@ -1,39 +1,27 @@
 import React, { useEffect, useState } from "react";
-import GetText from "./scripter.lang";
+import GetText from "./chat_gpt";
 
 import styles from "./scripter.module.scss";
 import menu_icon from "../../assets/svg/script/menu.svg";
 
 import loop_fig from "../../assets/svg/script/loop.svg";
-import youtube2 from "../../assets/svg/script/youtube.svg";
+import youtube2 from "../../assets/svg/script/youtube2.svg";
 import video_scripter from "../../assets/svg/script/video_scripter.svg";
 
 import DashNav from "../../layouts/dash-navbar/DashNav";
 import Footer from "../../layouts/footer/Footer";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import TikTokScripter from "./scripts/TikTokScripter";
-import YoutubeScripter from "./scripts/YoutubeScripter";
-import { GetOneDraft } from "../../redux/Drafts/draft.actions";
+// import TikTokGpt from "./scripts/TikTokGpt";
+import YoutubeGpt from "./chats/YoutubeGpt";
 
-function Scripter() {
+function ChatGpt() {
   const lang = useSelector((state) => state?.LangReducer?.lang);
-  const draft = useSelector((state) => state?.DraftReducer?.draft);
   const [text, setText] = useState(GetText(lang));
   useEffect(() => {
     setText(GetText(lang));
   }, [lang]);
-
-  let { _id } = useParams();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (_id) {
-      dispatch(GetOneDraft(_id));
-    }
-  }, [_id]);
 
   const scripts_types = [
     {
@@ -82,10 +70,8 @@ function Scripter() {
               </div>
             </div>
             <div className={styles.body}>
-              {scrp_type.value === "yt" && (
-                <YoutubeScripter draft={draft} text={text} />
-              )}
-              {scrp_type.value === "vs" && <TikTokScripter text={text} />}
+              {scrp_type.value === "yt" && <YoutubeGpt text={text} />}
+              {/* {scrp_type.value === "vs" && <TikTokGpt text={text} />} */}
             </div>
 
             {open && (
@@ -122,4 +108,4 @@ function Scripter() {
   );
 }
 
-export default Scripter;
+export default ChatGpt;

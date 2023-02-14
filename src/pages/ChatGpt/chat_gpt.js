@@ -15,14 +15,14 @@ let items_fr = [
 ];
 
 let minutes = [
-  { title: "1-3 minutes", value: "p-1" },
-  { title: "4-6 minutes", value: "p-2" },
-  { title: "7-9 minutes", value: "p-3" },
-  { title: "10-12 minutes", value: "p-4" },
-  { title: "13-15 minutes", value: "a-1" },
-  { title: "16-18 minutes", value: "a-2" },
-  { title: "20-24 minutes", value: "a-3" },
-  { title: "25-30 minutes", value: "a-4" },
+  { title: "1-3 minutes", value: "1" },
+  { title: "4-6 minutes", value: "2" },
+  { title: "7-9 minutes", value: "3" },
+  { title: "10-12 minutes", value: "4" },
+  { title: "13-15 minutes", value: "5" },
+  { title: "16-18 minutes", value: "6" },
+  { title: "20-24 minutes", value: "7" },
+  { title: "25-30 minutes", value: "8" },
 ];
 
 const texts = {
@@ -30,7 +30,7 @@ const texts = {
     YouTube_Scripter: "YouTube Scripter",
     Tiktok_Scripter: "Tiktok Scripter",
     Key_words: "Key words",
-    Description: "Description :",
+    Description: "Text :",
     Generate: "Generate",
 
     Title: "Title",
@@ -49,7 +49,7 @@ const texts = {
     languages: "Languages",
     duration: "Duration",
     minutes: minutes,
-    Content: "Script",
+    ChatGpt: "Chat-Scripter",
     Reload: " Reload",
     textarea: "History of McDonald's",
   },
@@ -58,7 +58,7 @@ const texts = {
     YouTube_Scripter: "YouTube  Script",
     Tiktok_Scripter: "Tiktok  Script",
     Key_words: "Mots Clés",
-    Description: "Description :",
+    Description: "Text :",
     Generate: "Générer",
 
     Title: "Titre",
@@ -76,7 +76,7 @@ const texts = {
     languages: "Langues",
     duration: "Durée",
     minutes: minutes,
-    Content: "Script",
+    ChatGpt: "Chat-Scripter",
     Reload: " Relancer",
     textarea: "histoire de  McDonald's",
   },
