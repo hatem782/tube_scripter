@@ -18,6 +18,7 @@ import DashNav from "../../layouts/dash-navbar/DashNav";
 import Footer from "../../layouts/footer/Footer";
 import { useSelector } from "react-redux";
 import GetText from "./settings.lang";
+import { useNavigate } from "react-router-dom";
 
 function Settings() {
   const user = useSelector((state) => state.UserReducer?.user);
@@ -49,7 +50,9 @@ function Settings() {
 
           <div className={styles.container2}>
             <div className={styles.left_side}>
-              <img src={user_img} alt="user" />
+                <div className={styles.imgUser}>
+                  <i class="fa-solid fa-user"></i>
+                </div>
               <h2>
                 {user.firstName} {user.lastName}
               </h2>
@@ -89,6 +92,16 @@ function Settings() {
 
 const Profile = ({ text }) => {
   const user = useSelector((state) => state.UserReducer?.user);
+  const [price,setPrice] = useState(null)
+  useEffect(()=>{
+    if(user.plan == "free")
+      setPrice('2500')
+    else if(user.plan == "premium")
+    setPrice('20000') 
+    else if(user.plan == "starter")
+    setPrice('8000') 
+    
+  },[user])
   return (
     <div className={styles.profile}>
       <div className={styles.info}>
@@ -110,16 +123,9 @@ const Profile = ({ text }) => {
 
       <div className={styles.info}>
         <h4>{text.Number_of_words}</h4>
-        <h2>{user.nbr_words}</h2>
+        <h2>{user.nbr_words}/{price}</h2>
       </div>
 
-      <div className={styles.info}>
-        <h4>{text.Notifications}</h4>
-        <h2 className={styles.notif}>
-          On
-          <Switcher />
-        </h2>
-      </div>
     </div>
   );
 };
@@ -141,11 +147,23 @@ const VotrePlan = ({ text }) => {
     }
   };
 
+  let navigate = useNavigate()
+
   return (
     <div className={styles.votre_plan}>
       <span className={styles.actual}>{text.Your_current_plan}</span>
 
+        {user.plan == "free" ? 
+        <>
       <div className={styles.plan}>
+        <h2>{text.noplan}</h2>
+        <p>{text.notext}</p>
+      </div>  
+      <Red_Button onClick={e => navigate('/home#payment')}>{text.nosubs}</Red_Button>
+        </>
+        :
+        <>
+        <div className={styles.plan}>
         <h2>{plan.title}</h2>
         <div className={styles.caracts}>
           {plan.caracts.map((caract, key) => {
@@ -155,9 +173,12 @@ const VotrePlan = ({ text }) => {
               </Caract>
             );
           })}
-        </div>
+        </div> 
       </div>
       <Red_Button onClick={cancel_sub}>{text.Cancel_Subscription}</Red_Button>
+        </>
+        }
+       
     </div>
   );
 };

@@ -12,6 +12,7 @@ import Select from "../../../components/select/Select";
 import Block from "../../../components/Block/Block";
 
 import styles from "../scripter.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const YoutubeScripter = ({ text, draft }) => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const YoutubeScripter = ({ text, draft }) => {
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
+  let navigate = useNavigate();
   useEffect(() => {
     console.log(isModifyBtn);
   }, [isModifyBtn]);
@@ -118,6 +120,11 @@ const YoutubeScripter = ({ text, draft }) => {
         </div>
 
         <div className={styles.button}>
+        <div className={styles.btn}>
+            <Red_Button onClick={e => navigate('/tubeChat')}>
+              {text.EditChat}
+            </Red_Button>
+          </div>
           <div className={styles.btn}>
             <Red_Button loading={script?.payload} onClick={GetAllPossible}>
               {text.Generate}

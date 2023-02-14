@@ -46,7 +46,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/script" element={<Scripter />} />
                 <Route path="/script/:_id" element={<Scripter />} />
-                <Route path="/chatgpt" element={<ChatGpt />} />
+                <Route path="/tubeChat" element={<ChatGpt />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/bibleo" element={<Bibleotheque />} />
                 <Route path="/contact" element={<Contact />} />

@@ -16,7 +16,7 @@ function OurPlans() {
   }, [lang]);
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} id="payment">
       <h1>
         {text.title} <span> {text.choose} </span>
       </h1>

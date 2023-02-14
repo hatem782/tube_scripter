@@ -2,7 +2,7 @@ const texts = {
   en: {
     home: "Home",
     Script: "Script",
-    ChatGpt: "ChatGpt",
+    ChatGpt: "Tube Scripter Chat",
     Library: "Library",
     Contact: "Contact",
     Setting: "Setting",
@@ -12,8 +12,8 @@ const texts = {
   fr: {
     home: "Accueil",
     Script: "Scripte",
-    ChatGpt: "ChatGpt",
-    Library: "Bibleothéque",
+    ChatGpt: "Tube Scripter Chat",
+    Library: "Bibliothèque",
     Contact: "Contact",
     Setting: "Paramétre",
     Logout: "Déconnection",

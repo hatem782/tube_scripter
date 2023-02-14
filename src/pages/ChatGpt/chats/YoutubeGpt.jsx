@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { YoutubeChat } from "../../../redux/Scripter/scripter.actions";
 
@@ -34,6 +34,13 @@ const YoutubeGpt = ({ text }) => {
   };
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
+
+  useEffect(()=>{
+    if(script.youtubetitle.length> 0 &&script.youtubedescription.length> 0 &&script.content_scripter.length> 0  )
+    setForm({
+      text:script.youtubetitle + '\n\n'+ script.youtubedescription +'\n\n' +script.content_scripter + '\n\n',
+    })
+  },[script])
 
   return (
     <div className={styles.scripter}>

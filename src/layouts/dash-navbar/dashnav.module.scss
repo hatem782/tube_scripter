@@ -38,15 +38,24 @@
       background-color: black;
     }
 
-    .user_img {
-      height: 44px;
-      object-fit: cover;
-      aspect-ratio: 1/1;
+
+    .imgUser {
       margin: 0px 15px 0px 20px;
-      border: solid 2px white;
-      outline: solid 1px red;
-      border-radius: 500px;
-    }
+      
+      width: 42px;
+      height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      object-fit: cover;
+      border-radius: 50%;
+      border: solid 2px transparent;
+      color: white;
+      background: red;
+      outline: solid 2px red;
+    
+}
   }
 }
 

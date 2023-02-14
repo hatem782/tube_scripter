@@ -40,7 +40,7 @@ function Stats() {
           <div className={styles.img_cont}>
             <img src={circle_75} />
             <div className={styles.data}>
-              <h2>15000+</h2>
+              <h2>15K+</h2>
               <span>{text.circle2.title}</span>
             </div>
           </div>

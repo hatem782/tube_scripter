@@ -55,30 +55,6 @@ function Footer() {
           </div>
 
           <div className={styles.external_links}>
-            <div className={styles.externals}>
-              <h2>{text.FIND_US_ON}</h2>
-              <div className={styles.rxs}>
-                <NavLink to="/" className={styles.rx}>
-                  <FaLinkedinIn />
-                </NavLink>
-                <NavLink to="/" className={styles.rx}>
-                  <FaInstagram />
-                </NavLink>
-                <NavLink to="/" className={styles.rx}>
-                  <FaTwitter />
-                </NavLink>
-                <NavLink to="/" className={styles.rx}>
-                  <FaFacebookF />
-                </NavLink>
-                <NavLink to="/" className={styles.rx}>
-                  <FaYoutube />
-                </NavLink>
-                <NavLink to="/" className={styles.rx}>
-                  <FaTiktok />
-                </NavLink>
-              </div>
-            </div>
-
             <div className={styles.lang}>
               <LangSelect text={text} initial_lang={lang} />
             </div>

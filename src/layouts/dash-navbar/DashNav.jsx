@@ -33,7 +33,7 @@ function DashNav() {
           <NavLink to="/script"> {text.Script} </NavLink>
         </span>
         <span className={styles.link}>
-          <NavLink to="/chatgpt"> {text.ChatGpt} </NavLink>
+          <NavLink to="/tubeChat"> {text.ChatGpt} </NavLink>
         </span>
         <span className={styles.link}>
           <NavLink to="/bibleo"> {text.Library} </NavLink>
@@ -42,8 +42,10 @@ function DashNav() {
           <NavLink to="/contact"> {text.Contact} </NavLink>
         </span>
         <span className={styles.separator} />
-        <img className={styles.user_img} src={user_img} alt="user" />
-        <Select text={text} />
+        <div className={styles.imgUser}>
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                 <Select text={text} />
       </div>
     </div>
   );

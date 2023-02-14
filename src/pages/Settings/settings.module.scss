@@ -60,12 +60,17 @@
         justify-content: center;
         flex-direction: column;
 
-        img {
-          height: 110px;
-          width: 110px;
+        .imgUser {
+          width: 100px;
+          height: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 3.5em;
           object-fit: cover;
-          border-radius: 500px;
+          border-radius: 50%;
           border: solid 4px transparent;
+          color: red;
           outline: solid 4px red;
         }
 
