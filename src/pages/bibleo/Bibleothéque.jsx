@@ -9,7 +9,9 @@ import DashNav from "../../layouts/dash-navbar/DashNav";
 import Footer from "../../layouts/footer/Footer";
 
 import { useSelector, useDispatch } from "react-redux";
-import { GetAllDrafts } from "../../redux/Drafts/draft.actions";
+import { DeleteDraft, GetAllDrafts } from "../../redux/Drafts/draft.actions";
+
+import delete_icon from "../../assets/svg/script/delete.svg";
 
 const Bibleotheque = () => {
   const dispatch = useDispatch();
@@ -49,17 +51,30 @@ const Bibleotheque = () => {
 
 const Card = ({ type = "yt", draft }) => {
   const scripter = scripts_types.find((st) => st.value === type);
+  const dispatch = useDispatch();
+
+  const openDraft = () => {
+    navigate(`/script/${draft?._id}`);
+  };
+
+  const handle_delete = () => {
+    dispatch(DeleteDraft(draft));
+  };
+
   let navigate = useNavigate();
   return (
-    <div
-      className={styles.card}
-      onClick={(e) => navigate(`/script/${draft?._id}`)}
-    >
-      <div className={styles.img_type}>
-        <img src={scripter.img} alt={scripter.title} />
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <div className={styles.img_type} onClick={openDraft}>
+          <img src={scripter.img} alt={scripter.title} />
+        </div>
+        <div className={styles.delete_icon}>
+          <img src={delete_icon} alt="delete" onClick={handle_delete} />
+        </div>
       </div>
-      <h3>{draft?.draft_title}</h3>
-      <p>{draft?.draft?.description}</p>
+
+      <h3 onClick={openDraft}>{draft?.draft_title}</h3>
+      <p onClick={openDraft}>{draft?.draft?.description}</p>
     </div>
   );
 };

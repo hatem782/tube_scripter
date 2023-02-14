@@ -44,6 +44,7 @@ const CreateDraft = (form) => {
 };
 
 const GetAllDrafts = () => {
+  console.log("aaaaaaaaaaaaaaaaa");
   return async (dispatch) => {
     try {
       dispatch({
@@ -159,4 +160,30 @@ const UpdateDraft = (draft) => {
   };
 };
 
-export { CreateDraft, GetAllDrafts, GetOneDraft, UpdateDraft };
+const DeleteDraft = (draft) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: keys.payload,
+        value: true,
+      });
+
+      const response = await axios.delete(
+        `/api/draft/deleteDraft/${draft._id}`
+      );
+      console.log(response);
+      toast.success("draft deleted successfully");
+
+      dispatch({
+        type: keys.payload,
+        value: false,
+      });
+      dispatch(GetAllDrafts());
+    } catch (error) {
+      console.log(error?.response);
+      toast.error(error?.response?.data?.message);
+    }
+  };
+};
+
+export { CreateDraft, GetAllDrafts, GetOneDraft, UpdateDraft, DeleteDraft };
