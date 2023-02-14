@@ -4,6 +4,8 @@ import styles from "./buttons.module.scss";
 import play_img from "../../assets/svg/play.svg";
 import { useNavigate } from "react-router-dom";
 
+import { CgSpinner } from "react-icons/cg";
+
 export function White_Button({ children, onClick }) {
   return (
     <button className={styles.white_button} onClick={onClick}>
@@ -15,7 +17,13 @@ export function White_Button({ children, onClick }) {
 export function Red_Button({ children, onClick, loading = false }) {
   return (
     <button disabled={loading} className={styles.red_button} onClick={onClick}>
-      {loading ? "Loading..." : children}
+      {loading ? (
+        <>
+          <CgSpinner className={styles.spinner} /> Loading
+        </>
+      ) : (
+        children
+      )}
     </button>
   );
 }
@@ -30,11 +38,13 @@ export function Red_Button2({ children, onClick }) {
 }
 
 export function Red_Button3({ children, onClick }) {
-
-  let navigator = useNavigate()
+  let navigator = useNavigate();
 
   return (
-    <button className={styles.red_button3} onClick={e => navigator('/script')}>
+    <button
+      className={styles.red_button3}
+      onClick={(e) => navigator("/script")}
+    >
       {children}
     </button>
   );

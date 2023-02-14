@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isPremium, isStandar } from "../../../custom/user.access";
 import { YoutubeChat } from "../../../redux/Scripter/scripter.actions";
 
 import reload_fig from "../../../assets/svg/script/reload.svg";
 
 import { Red_Button } from "../../../components/buttons/Buttons";
-import TextField from "../../../components/inputs/TextField";
 import TextArea from "../../../components/TextArea/TextArea";
-import Select from "../../../components/select/Select";
 import Block from "../../../components/Block/Block";
 
 import styles from "../scripter.module.scss";
+import { toast } from "react-hot-toast";
 
 const YoutubeGpt = ({ text }) => {
   const dispatch = useDispatch();
@@ -23,6 +21,10 @@ const YoutubeGpt = ({ text }) => {
   });
 
   const GetAllPossible = () => {
+    if (form.text.length >= 2000) {
+      toast.error("text must be less than 2000 caracter");
+      return;
+    }
     dispatch(YoutubeChat(form, user));
   };
 
@@ -32,10 +34,6 @@ const YoutubeGpt = ({ text }) => {
   };
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
-
-  useEffect(() => {
-    console.log(isModifyBtn);
-  }, [isModifyBtn]);
 
   return (
     <div className={styles.scripter}>
@@ -49,6 +47,7 @@ const YoutubeGpt = ({ text }) => {
               isLabeled={true}
               label={text.Description}
               placeholder={text.textarea}
+              rows={16}
             />
           </div>
         </div>
