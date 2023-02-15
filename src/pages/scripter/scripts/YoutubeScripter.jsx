@@ -15,7 +15,6 @@ import styles from "../scripter.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const YoutubeScripter = ({ text, draft }) => {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
   const [form, setForm] = useState({
@@ -26,14 +25,17 @@ const YoutubeScripter = ({ text, draft }) => {
     num_copies: 1,
     duration: "p-1",
     draft_title: "",
+    type:"yt"
   });
 
+  console.log(script)
+  
+  const dispatch = useDispatch();
   useEffect(() => {
     if (draft) {
       setForm({ ...form, draft_title: draft?.draft_title });
     }
   }, [draft]);
-
   const GetAllPossible = () => {
     dispatch(GetAllScriptsYT(form, user));
   };
@@ -57,6 +59,10 @@ const YoutubeScripter = ({ text, draft }) => {
   useEffect(() => {
     console.log(isModifyBtn);
   }, [isModifyBtn]);
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <div className={styles.scripter}>
@@ -152,7 +158,7 @@ const YoutubeScripter = ({ text, draft }) => {
             isBtn={isModifyBtn}
             label={text.Content}
             name="Script"
-            parag={script?.content_scripter || ""}
+            parag={script?.content_scripter?.replace(/##/g,`\n`) || ""}
           />
         </div>
 

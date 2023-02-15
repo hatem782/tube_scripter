@@ -10,6 +10,7 @@ import Block from "../../../components/Block/Block";
 
 import styles from "../scripter.module.scss";
 import { toast } from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const TikTokGpt = ({ text }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const TikTokGpt = ({ text }) => {
     text: "",
     num_copies: 1,
   });
+  let { type } = useParams();
 
   const GetAllPossible = () => {
     if (form.text.length >= 2000) {
@@ -36,23 +38,27 @@ const TikTokGpt = ({ text }) => {
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
   useEffect(() => {
-    if (
-      script.tiktoktitle.length > 0 &&
-      script.tiktokintro.length > 0 &&
-      script.tiktokhooks.length > 0 &&
-      script.tiktokscriptdescription.length > 0
-    )
-      setForm({
-        text:
-          script.tiktoktitle +
-          "\n\n" +
-          script.tiktokintro +
-          "\n\n" +
-          script.tiktokhooks +
-          "\n\n" +
-          script.tiktokscriptdescription +
-          "\n\n",
-      });
+    if(type && type =="shortFormat"){
+      if (
+        script.tiktoktitle.length > 0 &&
+        script.tiktokintro.length > 0 &&
+        script.tiktokhooks.length > 0 &&
+        script.tiktokscriptdescription.length > 0
+      )
+        setForm({
+          text:
+            script.tiktoktitle +
+            "\n\n" +
+            script.tiktokintro +
+            "\n\n" +
+            script.tiktokhooks +
+            "\n\n" +
+            script.tiktokscriptdescription +
+            "\n\n",
+        });
+    }
+
+   
   }, [script]);
 
   return (

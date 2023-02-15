@@ -64,7 +64,7 @@ const texts = {
     Content: "Script",
     Reload: " Reload",
     textarea: "History of McDonald's",
-    Tik_minutes: Tik_minutes,
+    minutesTk: minutesTk,
   },
 
   fr: {

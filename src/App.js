@@ -44,9 +44,10 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/home" element={<Home />} />
-                <Route path="/script" element={<Scripter />} />
-                <Route path="/script/:_id" element={<Scripter />} />
+                <Route path="/script/:type" element={<Scripter />} />
+                <Route path="/script/:type/:_id" element={<Scripter />} />
                 <Route path="/tubeChat" element={<ChatGpt />} />
+                <Route path="/tubeChat/:type" element={<ChatGpt />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/bibleo" element={<Bibleotheque />} />
                 <Route path="/contact" element={<Contact />} />

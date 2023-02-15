@@ -7,6 +7,7 @@ import menu_icon from "../../assets/svg/script/menu.svg";
 import loop_fig from "../../assets/svg/script/loop.svg";
 import youtube2 from "../../assets/svg/script/youtube2.svg";
 import video_scripter from "../../assets/svg/script/video_scripter.svg";
+import bot from "../../assets/images/bot.png";
 
 import DashNav from "../../layouts/dash-navbar/DashNav";
 import Footer from "../../layouts/footer/Footer";
@@ -26,12 +27,12 @@ function ChatGpt() {
 
   const scripts_types = [
     {
-      img: youtube2,
+      img: bot,
       title: text.YouTube_Scripter,
       value: "yt",
     },
     {
-      img: video_scripter,
+      img: bot,
       title: text.Tiktok_Scripter,
       value: "vs",
     },
@@ -63,12 +64,7 @@ function ChatGpt() {
         <div className={styles.content}>
           <div className={styles.window}>
             <div className={styles.head}>
-              <img
-                onClick={handleopne}
-                src={menu_icon}
-                className={styles.menu_btn}
-                alt="menu btn"
-              />
+
               <div className={styles.selected_scripter}>
                 <img
                   src={scrp_type.img}

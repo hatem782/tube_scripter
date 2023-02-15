@@ -12,7 +12,7 @@ import DashNav from "../../layouts/dash-navbar/DashNav";
 import Footer from "../../layouts/footer/Footer";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TikTokScripter from "./scripts/TikTokScripter";
 import YoutubeScripter from "./scripts/YoutubeScripter";
@@ -27,6 +27,8 @@ function Scripter() {
   }, [lang]);
 
   let { _id } = useParams();
+  let { type } = useParams();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,10 +46,11 @@ function Scripter() {
     {
       img: video_scripter,
       title: text.Tiktok_Scripter,
-      value: "vs",
+      value: "tk",
     },
   ];
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
   const [scrp_type, setScrp_type] = useState(scripts_types[0]);
 
   const handleSelect = (type) => {
@@ -58,6 +61,18 @@ function Scripter() {
   const handleopne = () => {
     setOpen(!open);
   };
+
+  useEffect(()=>{
+    if(type == "longFormat"){
+      setScrp_type(scripts_types[0]);
+
+    }else if(type == "shortFormat" ){
+      setScrp_type(scripts_types[1]);
+
+    }else{
+      navigate('/settings')
+    }
+  },[type])
 
   return (
     <>
@@ -85,7 +100,7 @@ function Scripter() {
               {scrp_type.value === "yt" && (
                 <YoutubeScripter draft={draft} text={text} />
               )}
-              {scrp_type.value === "vs" && <TikTokScripter text={text} />}
+              {scrp_type.value === "tk" && <TikTokScripter draft={draft} text={text}  />}
             </div>
 
             {open && (

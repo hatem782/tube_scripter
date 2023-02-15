@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./bibleo.module.scss";
 
 import youtube from "../../assets/svg/script/youtube.svg";
@@ -12,12 +12,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { DeleteDraft, GetAllDrafts } from "../../redux/Drafts/draft.actions";
 
 import delete_icon from "../../assets/svg/script/delete.svg";
+import GetText from "./biblep.lang";
 
 const Bibleotheque = () => {
   const dispatch = useDispatch();
 
   const drafts = useSelector((state) => state.DraftReducer.drafts) || [];
-
+  const lang = useSelector((state) => state?.LangReducer?.lang);
+  const [text, setText] = useState(GetText(lang));
+  useEffect(() => {
+    setText(GetText(lang));
+  }, [lang]);
   useEffect(() => {
     dispatch(GetAllDrafts());
   }, []);
@@ -26,21 +31,26 @@ const Bibleotheque = () => {
     <>
       <DashNav />
       <div className={styles.main}>
-        <h1>Bibliothèque</h1>
+        <h1>{text.type}</h1>
         <div className={styles.bibleo}>
           <div className={styles.textSize}>
-            <h2>Créer votre prochain script</h2>
+            <h2>{text.descriptionVideo}</h2>
           </div>
-          <div className={styles.cards}>
+          <div className={styles.cardsRand}>
             {drafts.map((draft, key) => {
-              return <Card key={key} type="yt" draft={draft} />;
+              return <Card key={key} type={draft.type} draft={draft} />;
             })}
-
-            <Card
-              type="vs"
-              description={`Des descriptions Vidéo accrocheuses et convaincantes qui permettent
-              de mieux classer vos vidéos`}
+          <div className={styles.textSize} style={{marginTop:"3.5rem"}}>
+            <h2>{text.createVideo}<span> Script</span></h2>
+          </div>
+            <CardRand
+              type='yt'
+              description={text.about}
             />
+            <CardRand
+              type='tk'
+              description={text.about}
+          />
           </div>
         </div>
       </div>
@@ -49,12 +59,14 @@ const Bibleotheque = () => {
   );
 };
 
-const Card = ({ type = "yt", draft }) => {
+const Card = ({ type, draft }) => {
   const scripter = scripts_types.find((st) => st.value === type);
+  console.log(scripter)
   const dispatch = useDispatch();
 
   const openDraft = () => {
-    navigate(`/script/${draft?._id}`);
+    type == "yt" ?  navigate(`/script/longFormat/${draft?._id}`):navigate(`/script/shortFormat/${draft?._id}`)
+   
   };
 
   const handle_delete = () => {
@@ -63,11 +75,16 @@ const Card = ({ type = "yt", draft }) => {
 
   let navigate = useNavigate();
   return (
-    <div className={styles.card}>
+    <div className={styles.card}  >
       <div className={styles.header}>
+        <div className={styles.imgBox}>
         <div className={styles.img_type} onClick={openDraft}>
-          <img src={scripter.img} alt={scripter.title} />
+          <img src={scripter?.img} alt={scripter?.title} />
         </div>
+          <h2>{scripter?.title}</h2>
+
+        </div>
+        
         <div className={styles.delete_icon}>
           <img src={delete_icon} alt="delete" onClick={handle_delete} />
         </div>
@@ -75,6 +92,26 @@ const Card = ({ type = "yt", draft }) => {
 
       <h3 onClick={openDraft}>{draft?.draft_title}</h3>
       <p onClick={openDraft}>{draft?.draft?.description}</p>
+    </div>
+  );
+};
+const CardRand = ({ type, description }) => {
+  const scripter = scripts_types.find((st) => st.value === type);
+  let navi = useNavigate()
+  return (
+    <div className={styles.cardRand} onClick={e => type =="yt" ?window.location.href ="/script/longFormat" : window.location.href = "/script/shortFormat" }>
+      <div className={styles.header}>
+        <div className={styles.imgBox}>
+        <div className={styles.img_type} >
+          <img src={scripter?.img} alt={scripter?.title} />
+        </div>
+
+        </div>
+
+      </div>
+      <h3>{scripter?.title}</h3>
+
+      <p >{description}</p>
     </div>
   );
 };
@@ -90,6 +127,6 @@ const scripts_types = [
   {
     img: video_scripter,
     title: "Scripter Short Format",
-    value: "vs",
+    value: "tk",
   },
 ];

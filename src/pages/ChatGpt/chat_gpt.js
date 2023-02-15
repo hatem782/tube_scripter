@@ -27,8 +27,8 @@ let minutes = [
 
 const texts = {
   en: {
-    YouTube_Scripter: "YouTube Scripter",
-    Tiktok_Scripter: "Tiktok Scripter",
+    YouTube_Scripter: "TubeChat",
+    Tiktok_Scripter: "TubeChat",
     Key_words: "Key words",
     Description: "Text :",
     Generate: "Generate",
@@ -55,8 +55,8 @@ const texts = {
   },
 
   fr: {
-    YouTube_Scripter: "YouTube  Script",
-    Tiktok_Scripter: "Tiktok  Script",
+    YouTube_Scripter: "TubeChat",
+    Tiktok_Scripter: "TubeChat",
     Key_words: "Mots Clés",
     Description: "Text :",
     Generate: "Générer",

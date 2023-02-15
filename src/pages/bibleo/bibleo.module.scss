@@ -12,12 +12,12 @@
   }
 
   .bibleo {
-    padding: 60px 240px;
+    padding: 60px 0px;
     .textSize {
       width: 100%;
       display: flex;
       justify-content: center;
-
+      margin-top:1.5rem ;
       h2 {
         font-size: 36px;
         font-weight: 400;
@@ -26,6 +26,9 @@
         font-family: "Montserrat";
         color: black;
         cursor: pointer;
+      }
+      span{
+        color: red;
       }
       a {
         text-decoration: none;
@@ -37,13 +40,93 @@
       width: 100%;
       display: flex;
       align-items: stretch;
-      justify-content: space-between;
       flex-wrap: wrap;
+    }
+    .cardsRand {
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
   }
 }
 
 .card {
+  width: 32%;
+  padding: 30px 20px;
+  margin: 10px 5px;
+  border: solid 1px rgba($color: #707070, $alpha: 0.4);
+  border-radius: 30px;
+  cursor: pointer;
+  overflow: hidden;
+  height: auto;
+
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .imgBox{
+      display: flex;
+      align-items: center;
+      h2{
+        font-size: 18px;
+        font-family: "Montserrat";
+        color: black;
+        margin-left:0.5rem;
+        font-weight: 400;
+      }
+    }
+    .img_type {
+      height: 55px;
+      width: 65px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 13px;
+      background-color: white;
+      border: solid 1px rgba($color: #707070, $alpha: 0.16);
+      box-shadow: 0px 3px 6px rgba($color: #000000, $alpha: 0.16);
+
+      img {
+        width: 28px;
+      }
+    }
+
+    .delete_icon {
+      img {
+        width: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 21px;
+    font-weight: 500;
+    margin: 20px 0px 15px 0px;
+    font-family: "Montserrat";
+    color: black;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0px 0px 0px 0px;
+    font-family: "Montserrat";
+    color: black;
+    // text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+.cardRand {
   width: 48%;
   padding: 40px 30px;
   margin: 10px 0px;
@@ -58,7 +141,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    .imgBox{
+      display: flex;
+      align-items: center;
+      h2{
+        font-size: 20px;
+        font-family: "Montserrat";
+        color: black;
+        margin-left:1rem;
+        font-weight: 400;
+      }
+    }
     .img_type {
       height: 60px;
       width: 70px;
@@ -109,6 +202,6 @@
 }
 @media only screen and (max-width: 1605px) {
   .bibleo {
-    padding: 60px 80px !important;
+    padding: 60px 0px !important;
   }
 }

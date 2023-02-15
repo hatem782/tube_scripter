@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllScriptsTikTok } from "../../../redux/Scripter/scripter.actions";
 
@@ -12,8 +12,10 @@ import Block from "../../../components/Block/Block";
 import styles from "../scripter.module.scss";
 
 import { useNavigate } from "react-router-dom";
+import { CreateDraft, UpdateDraft } from "../../../redux/Drafts/draft.actions";
+import TextField from "../../../components/inputs/TextField";
 
-const TikTokScripter = ({ text }) => {
+const TikTokScripter = ({ text, draft }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
@@ -23,6 +25,7 @@ const TikTokScripter = ({ text }) => {
     num_copies: 1,
     timeline: "t-1",
     tone_of_voice: "excited",
+    type:"tk"
   });
 
   let navigate = useNavigate();
@@ -31,20 +34,45 @@ const TikTokScripter = ({ text }) => {
     dispatch(GetAllScriptsTikTok(form, user));
   };
 
+  console.log(script)
+
   const handle_change = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
+  };
+
+  useEffect(() => {
+    if (draft) {
+      setForm({ ...form, draft_title: draft?.draft_title });
+    }
+  }, [draft]);
+  const SaveToDraft = () => {
+    if (draft) {
+      dispatch(UpdateDraft(draft));
+    } else {
+      dispatch(CreateDraft(form));
+    }
   };
 
   return (
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.form_body}>
+        <div className={styles.input}>
+            <TextField
+              isLabeled={true}
+              onChange={handle_change}
+              value={form.draft_title}
+              name="draft_title"
+              label="Draft Title"
+              placeholder="Draft Title"
+            />
+          </div>
           <div className={styles.selects}>
             <Select
               onChange={handle_change}
-              text={text}
               name="language"
+              label={text.languages}
               with_img={true}
               items={text.langs}
             />
@@ -62,7 +90,7 @@ const TikTokScripter = ({ text }) => {
               name="timeline"
               with_img={false}
               label={text.duration}
-              items={text.Tik_minutes}
+              items={text.minutesTk}
             />
           </div>
           <div className={styles.input}>
@@ -78,7 +106,7 @@ const TikTokScripter = ({ text }) => {
         </div>
         <div className={styles.button}>
           <div className={styles.btn}>
-            <Red_Button onClick={(e) => navigate("/tubeChat")}>
+            <Red_Button onClick={(e) => navigate("/tubeChat/shortFormat")}>
               {text.EditChat}
             </Red_Button>
           </div>
@@ -123,6 +151,11 @@ const TikTokScripter = ({ text }) => {
             <img src={reload_fig} alt="reload" />
             <span style={{ margin: "0px 10px" }}>{text.Reload}</span>
           </Red_Button>
+          <div style={{ marginLeft: "1rem" }}>
+            <Red_Button onClick={SaveToDraft}>
+              {draft ? "Update" : "Save"}
+            </Red_Button>
+          </div>
         </div>
       </div>
     </div>

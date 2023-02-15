@@ -10,9 +10,10 @@ const CreateDraft = (form) => {
         type: keys.payload,
         value: true,
       });
-
-      const { draft_title } = form;
-      const { youtubetitle, youtubedescription, content_scripter } =
+      console.log("sssssssss",keys.payload);
+      const { draft_title,type } = form;
+      if(type == "yt"){
+        const { youtubetitle, youtubedescription, content_scripter } =
         getState().ScriptReducer;
       console.log(youtubetitle, youtubedescription, content_scripter);
 
@@ -22,7 +23,8 @@ const CreateDraft = (form) => {
           description: youtubedescription,
           content: content_scripter,
         },
-        draft_title,
+        type:type,
+        draft_title:draft_title
       });
       console.log(response);
 
@@ -31,7 +33,33 @@ const CreateDraft = (form) => {
       dispatch({
         type: keys.payload,
         value: false,
+      });  
+      }else if(type == "tk"){
+        const { tiktokscriptdescription,
+          tiktokintro,
+          tiktokhooks,tiktoktitle} =
+        getState().ScriptReducer;
+
+      const response = await axios.post(`/api/draft/createDraft`, {
+        draft: {
+          title: tiktoktitle,
+          hooks: tiktokhooks,
+          description: tiktokscriptdescription,
+          intro:tiktokintro
+        },
+        type:type,
+        draft_title:draft_title
       });
+      console.log(response);
+
+      toast.success("draft created successfully");
+
+      dispatch({
+        type: keys.payload,
+        value: false,
+      });  
+      }
+      
     } catch (error) {
       dispatch({
         type: keys.payload,
@@ -44,7 +72,6 @@ const CreateDraft = (form) => {
 };
 
 const GetAllDrafts = () => {
-  console.log("aaaaaaaaaaaaaaaaa");
   return async (dispatch) => {
     try {
       dispatch({
@@ -108,6 +135,26 @@ const GetOneDraft = (id) => {
       });
 
       dispatch({
+        type: scripter_keys.tiktokhooks,
+        value: draft.hooks,
+      });
+
+      dispatch({
+        type: scripter_keys.tiktokintro,
+        value: draft.intro,
+      });
+
+      dispatch({
+        type: scripter_keys.tiktokscriptdescription,
+        value: draft.description,
+      });
+
+      dispatch({
+        type: scripter_keys.tiktoktitle,
+        value: draft.title,
+      });
+
+      dispatch({
         type: keys.payload,
         value: false,
       });
@@ -129,7 +176,7 @@ const UpdateDraft = (draft) => {
         type: keys.payload,
         value: true,
       });
-
+      console.log("sssssssss",keys.payload);
       const { youtubetitle, youtubedescription, content_scripter } =
         getState().ScriptReducer;
 
@@ -140,6 +187,8 @@ const UpdateDraft = (draft) => {
           content: content_scripter,
         },
         _id: draft._id,
+        type:draft.type,
+        draft_title:draft.draft_title
       });
       console.log(response);
 

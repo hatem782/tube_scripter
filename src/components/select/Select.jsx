@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useOutsideEvent from "../../hooks/useOutsideEvent";
 
 import arrow from "../../assets/svg/navbar/select_.svg";
@@ -24,13 +24,18 @@ const Select = ({ onChange, name, label, with_img = false, items = [] }) => {
     onChange({ target: { value: item.value, name } });
   };
 
+
+  useEffect(()=>{
+    console.log(select)
+  },[select])
+
   return (
     <div ref={select_ref} className={styles.select}>
       <label>{label}</label>
 
       <div className={styles.header} onClick={handle_open}>
         {with_img && <img src={select.img} className={styles.flag} />}
-        <span>{select.title}</span>
+        <span>{select?.title}</span>
         <img src={arrow} className={styles.arrow} />
       </div>
 

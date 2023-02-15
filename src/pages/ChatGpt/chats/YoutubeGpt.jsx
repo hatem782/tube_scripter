@@ -10,9 +10,13 @@ import Block from "../../../components/Block/Block";
 
 import styles from "../scripter.module.scss";
 import { toast } from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const YoutubeGpt = ({ text }) => {
+
   const dispatch = useDispatch();
+  let { type } = useParams();
+
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
   const [form, setForm] = useState({
@@ -36,20 +40,22 @@ const YoutubeGpt = ({ text }) => {
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
   useEffect(() => {
-    if (
-      script.youtubetitle.length > 0 &&
-      script.youtubedescription.length > 0 &&
-      script.content_scripter.length > 0
-    )
-      setForm({
-        text:
-          script.youtubetitle +
-          "\n\n" +
-          script.youtubedescription +
-          "\n\n" +
-          script.content_scripter +
-          "\n\n",
-      });
+    if(type && type =="shortFormat"){
+      if (
+        script.youtubetitle?.length > 0 &&
+        script.youtubedescription?.length > 0 &&
+        script.content_scripter.length > 0
+      )
+        setForm({
+          text:
+            script.youtubetitle +
+            "\n\n" +
+            script.youtubedescription +
+            "\n\n" +
+            script.content_scripter +
+            "\n\n",
+        });
+    }
   }, [script]);
 
   return (

@@ -30,10 +30,10 @@ function DashNav() {
           <NavLink to="/home">{text.home}</NavLink>
         </span>
         <span className={styles.link}>
-          <NavLink to="/script"> {text.Script} </NavLink>
+          <NavLink to="/script/longFormat"> {text.Script} </NavLink>
         </span>
         <span className={styles.link}>
-          <NavLink to="/tubeChat"> {text.ChatGpt} </NavLink>
+          <a href="/tubeChat"> {text.ChatGpt} </a>
         </span>
         <span className={styles.link}>
           <NavLink to="/bibleo"> {text.Library} </NavLink>

@@ -58,7 +58,7 @@ const Block = ({ label, parag, name, isBtn }) => {
     <div className={styles.block}>
       <h1>{label} </h1>
       {!isBtn ? (
-        <>{newState && <p>{newState}</p>} </>
+        <>{newState && <p style={{whiteSpace: "pre-line"}}>{newState}</p>} </>
       ) : (
         <>
           {parag && (

@@ -150,7 +150,7 @@ const GetAllScriptsTikTok = (data) => {
       console.log(response4);
       dispatch({
         type: keys.tiktokhooks,
-        value: response4.data.data[0].text.split("\n")[0]?.replace("- ", ""),
+        value: response4.data.data[0].text.replace(/##/g,`\n`) ,
       });
 
       dispatch({
