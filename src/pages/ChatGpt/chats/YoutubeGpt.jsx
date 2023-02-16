@@ -19,53 +19,61 @@ const YoutubeGpt = ({ text }) => {
 
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
-  const [form, setForm] = useState({
-    text: "",
+  const [formS, setFormS] = useState({
+    textS: "",
     num_copies: 1,
   });
 
+  const [tes,settes]= useState(null);
+
   const GetAllPossible = () => {
-    if (form.text.length >= 2000) {
+    if (formS.textS.length >= 2000) {
       toast.error("text must be less than 2000 caracter");
       return;
     }
-    dispatch(YoutubeChat(form, user));
+    dispatch(YoutubeChat(formS, user));
   };
 
   const handle_change = (event) => {
     const { name, value } = event.target;
-    setForm({ ...form, [name]: value });
+    setFormS({ ...formS, [name]: value });
   };
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
   useEffect(() => {
-    if(type && type =="shortFormat"){
+    settes('hello')
+    if(type && type =="longFormat"){
+      
+      
       if (
-        script.youtubetitle?.length > 0 &&
-        script.youtubedescription?.length > 0 &&
+        script.youtubetitle.length > 0 &&
+        script.youtubedescription.length > 0 &&
         script.content_scripter.length > 0
-      )
-        setForm({
-          text:
-            script.youtubetitle +
-            "\n\n" +
-            script.youtubedescription +
-            "\n\n" +
-            script.content_scripter +
-            "\n\n",
+        ){
+        setFormS({
+          textS:
+          script.youtubetitle,
+          num_copies: 3,
         });
+
+      }
     }
   }, [script]);
+
+  useEffect(()=>{
+ console.log(formS)
+  },[formS])
+
 
   return (
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.form_body}>
           <div className={styles.input}>
-            <TextArea
+          <TextArea
               onChange={handle_change}
-              value={form.text}
+              value={formS.textS}
               name="text"
               isLabeled={true}
               label={text.Description}

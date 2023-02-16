@@ -19,9 +19,11 @@ import YoutubeScripter from "./scripts/YoutubeScripter";
 import { GetOneDraft } from "../../redux/Drafts/draft.actions";
 
 function Scripter() {
+  
   const lang = useSelector((state) => state?.LangReducer?.lang);
   const draft = useSelector((state) => state?.DraftReducer?.draft);
   const [text, setText] = useState(GetText(lang));
+
   useEffect(() => {
     setText(GetText(lang));
   }, [lang]);

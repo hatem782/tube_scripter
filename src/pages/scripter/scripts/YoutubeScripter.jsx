@@ -127,7 +127,7 @@ const YoutubeScripter = ({ text, draft }) => {
 
         <div className={styles.button}>
         <div className={styles.btn}>
-            <Red_Button onClick={e => navigate('/tubeChat')}>
+            <Red_Button onClick={e => navigate('/tubeChat/longFormat')}>
               {text.EditChat}
             </Red_Button>
           </div>

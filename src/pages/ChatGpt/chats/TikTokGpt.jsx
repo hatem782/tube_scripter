@@ -39,6 +39,7 @@ const TikTokGpt = ({ text }) => {
 
   useEffect(() => {
     if(type && type =="shortFormat"){
+      console.log(script)
       if (
         script.tiktoktitle.length > 0 &&
         script.tiktokintro.length > 0 &&
@@ -51,10 +52,11 @@ const TikTokGpt = ({ text }) => {
             "\n\n" +
             script.tiktokintro +
             "\n\n" +
-            script.tiktokhooks +
-            "\n\n" +
             script.tiktokscriptdescription +
-            "\n\n",
+            "\n\n"+
+            script.tiktokhooks +
+            "\n\n" 
+            
         });
     }
 

@@ -34,8 +34,6 @@ const TikTokScripter = ({ text, draft }) => {
     dispatch(GetAllScriptsTikTok(form, user));
   };
 
-  console.log(script)
-
   const handle_change = (event) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
