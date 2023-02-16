@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllScriptsYT } from "../../../redux/Scripter/scripter.actions";
 import { CreateDraft, UpdateDraft } from "../../../redux/Drafts/draft.actions";
+import keys from "../../../redux/Scripter/scripter.keys";
 
 import reload_fig from "../../../assets/svg/script/reload.svg";
 
@@ -25,15 +26,19 @@ const YoutubeScripter = ({ text, draft }) => {
     num_copies: 1,
     duration: "p-1",
     draft_title: "",
-    type:"yt"
+    type: "yt",
   });
 
-  console.log(script)
-  
+  console.log(script);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (draft) {
       setForm({ ...form, draft_title: draft?.draft_title });
+      dispatch({
+        type: keys.can_edit_youtube,
+        value: true,
+      });
     }
   }, [draft]);
   const GetAllPossible = () => {
@@ -60,9 +65,7 @@ const YoutubeScripter = ({ text, draft }) => {
     console.log(isModifyBtn);
   }, [isModifyBtn]);
 
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
 
   return (
     <div className={styles.scripter}>
@@ -126,8 +129,11 @@ const YoutubeScripter = ({ text, draft }) => {
         </div>
 
         <div className={styles.button}>
-        <div className={styles.btn}>
-            <Red_Button onClick={e => navigate('/tubeChat/longFormat')}>
+          <div className={styles.btn}>
+            <Red_Button
+              init_bloc={!script.can_edit_youtube}
+              onClick={(e) => navigate("/tubeChat/longFormat")}
+            >
               {text.EditChat}
             </Red_Button>
           </div>
@@ -158,22 +164,31 @@ const YoutubeScripter = ({ text, draft }) => {
             isBtn={isModifyBtn}
             label={text.Content}
             name="Script"
-            parag={script?.content_scripter?.replace(/##/g,`\n`) || ""}
+            parag={script?.content_scripter?.replace(/##/g, `\n`) || ""}
           />
         </div>
 
         <div className={styles.button}>
           <div style={{ marginRight: "1rem" }}>
-            <Red_Button onClick={(e) => setIsModifyBtn(!isModifyBtn)}>
+            <Red_Button
+              onClick={(e) => setIsModifyBtn(!isModifyBtn)}
+              init_bloc={!script.can_edit_youtube}
+            >
               <i className="fa-solid fa-pen" style={{ fontSize: "1.4em" }}></i>
             </Red_Button>
           </div>
-          <Red_Button onClick={GetAllPossible}>
+          <Red_Button
+            init_bloc={!script.can_edit_youtube}
+            onClick={GetAllPossible}
+          >
             <img src={reload_fig} alt="reload" />
             <span style={{ margin: "0px 10px" }}>{text.Reload}</span>
           </Red_Button>
           <div style={{ marginLeft: "1rem" }}>
-            <Red_Button onClick={SaveToDraft}>
+            <Red_Button
+              init_bloc={!script.can_edit_youtube}
+              onClick={SaveToDraft}
+            >
               {draft ? "Update" : "Save"}
             </Red_Button>
           </div>

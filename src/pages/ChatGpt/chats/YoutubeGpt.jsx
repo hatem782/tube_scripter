@@ -13,7 +13,6 @@ import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 const YoutubeGpt = ({ text }) => {
-
   const dispatch = useDispatch();
   let { type } = useParams();
 
@@ -24,7 +23,7 @@ const YoutubeGpt = ({ text }) => {
     num_copies: 1,
   });
 
-  const [tes,settes]= useState(null);
+  const [tes, settes] = useState(null);
 
   const GetAllPossible = () => {
     if (formS.textS.length >= 2000) {
@@ -42,39 +41,34 @@ const YoutubeGpt = ({ text }) => {
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
   useEffect(() => {
-    settes('hello')
-    if(type && type =="longFormat"){
-      
-      
+    settes("hello");
+    if (type && type == "longFormat") {
       if (
-        script.youtubetitle.length > 0 &&
-        script.youtubedescription.length > 0 &&
-        script.content_scripter.length > 0
-        ){
+        script.youtubetitle?.length > 0 &&
+        script.youtubedescription?.length > 0 &&
+        script.content_scripter?.length > 0
+      ) {
         setFormS({
-          textS:
-          script.youtubetitle,
+          textS: script.youtubetitle,
           num_copies: 3,
         });
-
       }
     }
   }, [script]);
 
-  useEffect(()=>{
- console.log(formS)
-  },[formS])
-
+  useEffect(() => {
+    console.log(formS);
+  }, [formS]);
 
   return (
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.form_body}>
           <div className={styles.input}>
-          <TextArea
+            <TextArea
               onChange={handle_change}
               value={formS.textS}
-              name="text"
+              name="textS"
               isLabeled={true}
               label={text.Description}
               placeholder={text.textarea}
@@ -99,11 +93,14 @@ const YoutubeGpt = ({ text }) => {
         </div>
         <div className={styles.button}>
           <div style={{ marginRight: "1rem" }}>
-            <Red_Button onClick={(e) => setIsModifyBtn(!isModifyBtn)}>
+            <Red_Button
+              init_bloc={!script.can_edit_gpt}
+              onClick={(e) => setIsModifyBtn(!isModifyBtn)}
+            >
               <i className="fa-solid fa-pen" style={{ fontSize: "1.5em" }}></i>
             </Red_Button>
           </div>
-          <Red_Button onClick={GetAllPossible}>
+          <Red_Button init_bloc={!script.can_edit_gpt} onClick={GetAllPossible}>
             <img src={reload_fig} alt="reload" />
             <span style={{ margin: "0px 10px" }}>{text.Reload}</span>
           </Red_Button>

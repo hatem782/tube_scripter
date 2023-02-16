@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllScriptsTikTok } from "../../../redux/Scripter/scripter.actions";
+import keys from "../../../redux/Scripter/scripter.keys";
 
 import reload_fig from "../../../assets/svg/script/reload.svg";
 
@@ -25,7 +26,7 @@ const TikTokScripter = ({ text, draft }) => {
     num_copies: 1,
     timeline: "t-1",
     tone_of_voice: "excited",
-    type:"tk"
+    type: "tk",
   });
 
   let navigate = useNavigate();
@@ -42,6 +43,10 @@ const TikTokScripter = ({ text, draft }) => {
   useEffect(() => {
     if (draft) {
       setForm({ ...form, draft_title: draft?.draft_title });
+      dispatch({
+        type: keys.can_edit_tiktok,
+        value: true,
+      });
     }
   }, [draft]);
   const SaveToDraft = () => {
@@ -56,7 +61,7 @@ const TikTokScripter = ({ text, draft }) => {
     <div className={styles.scripter}>
       <div className={styles.form}>
         <div className={styles.form_body}>
-        <div className={styles.input}>
+          <div className={styles.input}>
             <TextField
               isLabeled={true}
               onChange={handle_change}
@@ -141,16 +146,22 @@ const TikTokScripter = ({ text, draft }) => {
         </div>
         <div className={styles.button}>
           <div style={{ marginRight: "1rem" }}>
-            <Red_Button>
+            <Red_Button init_bloc={!script.can_edit_tiktok}>
               <i className="fa-solid fa-pen" style={{ fontSize: "1.5em" }}></i>
             </Red_Button>
           </div>
-          <Red_Button onClick={GetAllPossible}>
+          <Red_Button
+            init_bloc={!script.can_edit_tiktok}
+            onClick={GetAllPossible}
+          >
             <img src={reload_fig} alt="reload" />
             <span style={{ margin: "0px 10px" }}>{text.Reload}</span>
           </Red_Button>
           <div style={{ marginLeft: "1rem" }}>
-            <Red_Button onClick={SaveToDraft}>
+            <Red_Button
+              init_bloc={!script.can_edit_tiktok}
+              onClick={SaveToDraft}
+            >
               {draft ? "Update" : "Save"}
             </Red_Button>
           </div>

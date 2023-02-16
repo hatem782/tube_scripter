@@ -14,9 +14,20 @@ export function White_Button({ children, onClick }) {
   );
 }
 
-export function Red_Button({ children, onClick, loading = false }) {
+export function Red_Button({
+  children,
+  onClick,
+  loading = false,
+  init_bloc = false,
+}) {
   return (
-    <button disabled={loading} className={styles.red_button} onClick={onClick}>
+    <button
+      disabled={loading || init_bloc}
+      className={`
+      ${styles.red_button} 
+      ${init_bloc ? styles.initial_blocked : ""}`}
+      onClick={onClick}
+    >
       {loading ? (
         <>
           <CgSpinner className={styles.spinner} /> Loading

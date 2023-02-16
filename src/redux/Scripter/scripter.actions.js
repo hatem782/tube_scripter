@@ -13,6 +13,11 @@ const GetAllScriptsYT = (data, user) => {
         value: true,
       });
 
+      dispatch({
+        type: keys.can_edit_youtube,
+        value: false,
+      });
+
       // TO WRITE TITLE
       const response1 = await axios.post(`/api/writeSonicApi/youtubetitles`, {
         ...data,
@@ -73,12 +78,10 @@ const GetAllScriptsYT = (data, user) => {
         });
       }
 
-      if (isFree(user) || isStandar(user)) {
-        dispatch({
-          type: keys.payload,
-          value: false,
-        });
-      }
+      dispatch({
+        type: keys.can_edit_youtube,
+        value: true,
+      });
 
       dispatch({
         type: keys.payload,
@@ -103,6 +106,11 @@ const GetAllScriptsTikTok = (data) => {
         value: true,
       });
 
+      dispatch({
+        type: keys.can_edit_tiktok,
+        value: false,
+      });
+
       // TO WRITE TITLE
       const response1 = await axios.post(`/api/writeSonicApi/youtubetitles`, {
         ...data,
@@ -114,7 +122,7 @@ const GetAllScriptsTikTok = (data) => {
         type: keys.tiktoktitle,
         value: title,
       });
-      console.log(response1); // cv
+
       // TO WRITE Description
       const response2 = await axios.post(
         `/api/writeSonicApi/tiktokscriptdescription`,
@@ -122,7 +130,7 @@ const GetAllScriptsTikTok = (data) => {
           ...data,
         }
       );
-      console.log(response2); // cv
+
       let descs = response2.data;
       dispatch({
         type: keys.tiktokscriptdescription,
@@ -135,7 +143,7 @@ const GetAllScriptsTikTok = (data) => {
         video_title: title,
         search_term: title,
       });
-      console.log(response3);
+
       dispatch({
         type: keys.tiktokintro,
         value: response3.data.data[0].text.split("\n")[0]?.replace("- ", ""),
@@ -147,15 +155,19 @@ const GetAllScriptsTikTok = (data) => {
         video_title: title,
         search_term: title,
       });
-      console.log(response4);
+
       dispatch({
         type: keys.tiktokhooks,
-        value: response4.data.data[0].text.replace(/##/g,`\n`) ,
+        value: response4.data.data[0].text.replace(/##/g, `\n`),
       });
 
       dispatch({
         type: keys.payload,
         value: false,
+      });
+      dispatch({
+        type: keys.can_edit_tiktok,
+        value: true,
       });
     } catch (error) {
       dispatch({
@@ -175,10 +187,15 @@ const YoutubeChat = (data, user) => {
         type: keys.payload,
         value: true,
       });
+      dispatch({
+        type: keys.can_edit_gpt,
+        value: false,
+      });
 
       const response = await axios.post(`/api/writeSonicApi/chatsonic`, {
         ...data,
       });
+
       dispatch({
         type: keys.youtube_gpt,
         value: response.data.data.message,
@@ -187,6 +204,10 @@ const YoutubeChat = (data, user) => {
       dispatch({
         type: keys.payload,
         value: false,
+      });
+      dispatch({
+        type: keys.can_edit_gpt,
+        value: true,
       });
     } catch (error) {
       dispatch({

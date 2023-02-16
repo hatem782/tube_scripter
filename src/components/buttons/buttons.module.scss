@@ -38,8 +38,9 @@
 }
 
 .red_button {
-  padding: 12px 35px;
+  padding: 0px 35px;
   min-width: 260px;
+  height: 50px;
   background-color: #ff0000;
 
   display: flex;
@@ -102,4 +103,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.initial_blocked {
+  background-color: #646464;
+  cursor: not-allowed;
 }

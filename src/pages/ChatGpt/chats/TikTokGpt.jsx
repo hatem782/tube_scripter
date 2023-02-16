@@ -38,13 +38,13 @@ const TikTokGpt = ({ text }) => {
   const [isModifyBtn, setIsModifyBtn] = useState(false);
 
   useEffect(() => {
-    if(type && type =="shortFormat"){
-      console.log(script)
+    if (type && type == "shortFormat") {
+      console.log(script);
       if (
-        script.tiktoktitle.length > 0 &&
-        script.tiktokintro.length > 0 &&
-        script.tiktokhooks.length > 0 &&
-        script.tiktokscriptdescription.length > 0
+        script.tiktoktitle?.length > 0 &&
+        (script.tiktokintro?.length > 0 ||
+          script.tiktokhooks?.length > 0 ||
+          script.tiktokscriptdescription?.length > 0)
       )
         setForm({
           text:
@@ -53,14 +53,11 @@ const TikTokGpt = ({ text }) => {
             script.tiktokintro +
             "\n\n" +
             script.tiktokscriptdescription +
-            "\n\n"+
+            "\n\n" +
             script.tiktokhooks +
-            "\n\n" 
-            
+            "\n\n",
         });
     }
-
-   
   }, [script]);
 
   return (
@@ -96,11 +93,14 @@ const TikTokGpt = ({ text }) => {
         </div>
         <div className={styles.button}>
           <div style={{ marginRight: "1rem" }}>
-            <Red_Button onClick={(e) => setIsModifyBtn(!isModifyBtn)}>
+            <Red_Button
+              init_bloc={!script.can_edit_gpt}
+              onClick={(e) => setIsModifyBtn(!isModifyBtn)}
+            >
               <i className="fa-solid fa-pen" style={{ fontSize: "1.5em" }}></i>
             </Red_Button>
           </div>
-          <Red_Button onClick={GetAllPossible}>
+          <Red_Button init_bloc={!script.can_edit_gpt} onClick={GetAllPossible}>
             <img src={reload_fig} alt="reload" />
             <span style={{ margin: "0px 10px" }}>{text.Reload}</span>
           </Red_Button>
