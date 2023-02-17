@@ -6,7 +6,7 @@ const texts = {
       parag: `All process starts with an idea, use your creativity wisely.`,
     },
     exp2: {
-      title: "Faire des modifications",
+      title: "make modifications",
       parag: `Collaborate with artificial intelligence and get results that meet your expectations.`,
     },
     exp3: {

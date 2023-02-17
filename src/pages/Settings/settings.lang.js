@@ -20,7 +20,7 @@ const texts = {
 
   fr: {
     plan: plans_fr,
-    change_details: "Modifier vo  s détails",
+    change_details: "Modifier vos détails",
     Profile: "Profil",
     Your_plan: "Votre plan",
     name_and_lastname: "Nom & Prénom",

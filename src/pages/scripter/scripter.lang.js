@@ -39,8 +39,8 @@ let minutesTk = [
 
 const texts = {
   en: {
-    YouTube_Scripter: "YouTube Scripter",
-    Tiktok_Scripter: "Tiktok Scripter",
+    YouTube_Scripter: "Script Long Format",
+    Tiktok_Scripter: "Script Short Format",
     Key_words: "Key words",
     Description: "Description :",
     Generate: "Generate",
@@ -68,8 +68,8 @@ const texts = {
   },
 
   fr: {
-    YouTube_Scripter: "YouTube  Script",
-    Tiktok_Scripter: "Tiktok  Script",
+    YouTube_Scripter: "Script Format Long ",
+    Tiktok_Scripter: "Script Format court ",
     EditChat: "mdifier avec TubeChat",
 
     Key_words: "Mots Clés",

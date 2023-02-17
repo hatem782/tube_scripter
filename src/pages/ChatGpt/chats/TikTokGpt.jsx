@@ -32,7 +32,7 @@ const TikTokGpt = ({ text }) => {
 
   const handle_change = (event) => {
     const { name, value } = event.target;
-    setForm({ ...form, [name]: value });
+    setForm({text:value});
   };
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
@@ -58,7 +58,7 @@ const TikTokGpt = ({ text }) => {
             "\n\n",
         });
     }
-  }, [script]);
+  }, [type]);
 
   return (
     <div className={styles.scripter}>

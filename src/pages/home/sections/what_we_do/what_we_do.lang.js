@@ -1,7 +1,7 @@
 const texts = {
   en: {
     what_do_we_do: "WHAT DO WE DO ?",
-    text: "Tube Scripter est un générateur de scripts spécialisédans les vidéos YouTube.Cet outil est conçu pour être utilizer sur n'importe quelle thèmes de vidéo.",
+    text: "Tube Scripter is a script generator specialized in YouTube videos. This tool is designed to be used on any video theme.",
     click:"Start here"
   },
 

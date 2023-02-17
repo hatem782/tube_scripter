@@ -19,14 +19,14 @@ const YoutubeGpt = ({ text }) => {
   const user = useSelector((state) => state.UserReducer?.user);
   const script = useSelector((state) => state.ScriptReducer);
   const [formS, setFormS] = useState({
-    textS: "",
+    text: "",
     num_copies: 1,
   });
 
   const [tes, settes] = useState(null);
 
   const GetAllPossible = () => {
-    if (formS.textS.length >= 2000) {
+    if (formS.text?.length >= 2000) {
       toast.error("text must be less than 2000 caracter");
       return;
     }
@@ -35,7 +35,7 @@ const YoutubeGpt = ({ text }) => {
 
   const handle_change = (event) => {
     const { name, value } = event.target;
-    setFormS({ ...formS, [name]: value });
+    setFormS({text:value});
   };
 
   const [isModifyBtn, setIsModifyBtn] = useState(false);
@@ -49,12 +49,16 @@ const YoutubeGpt = ({ text }) => {
         script.content_scripter?.length > 0
       ) {
         setFormS({
-          textS: script.youtubetitle,
+          text: 
+            script.youtubetitle +'\n'+
+            script.youtubedescription +'\n'+
+            script.content_scripter.replace(/##/g, `\n`) +'\n',
+        
           num_copies: 3,
         });
       }
     }
-  }, [script]);
+  }, [type]);
 
   useEffect(() => {
     console.log(formS);
@@ -67,8 +71,8 @@ const YoutubeGpt = ({ text }) => {
           <div className={styles.input}>
             <TextArea
               onChange={handle_change}
-              value={formS.textS}
-              name="textS"
+              value={formS.text}
+              name="text"
               isLabeled={true}
               label={text.Description}
               placeholder={text.textarea}

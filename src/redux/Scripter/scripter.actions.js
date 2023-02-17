@@ -59,7 +59,7 @@ const GetAllScriptsYT = (data, user) => {
         console.log(response3);
         dispatch({
           type: keys.content_scripter,
-          value: response3.data.data.data[0].content,
+          value: response3.data
         });
       } else {
         //type parag

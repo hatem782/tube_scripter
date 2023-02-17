@@ -1,7 +1,7 @@
 const texts = {
   en: {
     t1: "Increase your production speed",
-    d1: "Whether you are short or tall, Tube Scripter will save you a lot of time",
+    d1: "Whether you are young or old, Tube Scripter will save you a lot of time",
     t2: "Save money",
     d2: "Whether it's yours or someone else's, time is precious. Take advantage of the possibilities offered by new technologies",
     t3: "infinite knowledge",
