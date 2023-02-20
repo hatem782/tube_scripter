@@ -21,7 +21,7 @@ const texts = {
     Confirm_Password: "Confirmez le mot de passe",
     Or_login_with: "Ou connectez-vous avec",
     have_an_account: "vous avez déjà un compte ?",
-    Login_now: "Connecte-toi maintenant",
+    Login_now: "Connectez-vous maintenant",
   },
 };
 
