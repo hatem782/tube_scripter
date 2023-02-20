@@ -14,7 +14,7 @@ const texts = {
     plan: plans_fr,
     title: "Prêt à  ",
     desc: `Tube Scripter est un générateur de scripts spécialisé 
-    dans les vidéos YouTube .Cet outil est conçu pour être utilizer 
+    dans les vidéos YouTube. Cet outil est conçu pour être utiliser 
     sur n'importe quelle thèmes de vidéos.`,
     choose: "commencer ?",
   },
