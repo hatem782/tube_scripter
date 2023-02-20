@@ -3,14 +3,14 @@ const texts = {
         descriptionVideo:"Your previous project",
         createVideo:"Create your next ",
         type:"Library",
-        about:"Eye-catching and compelling video descriptions that help your videos rank better"
+        about:"Script generator optimize for long format videos"
     },
   
     fr: {
         descriptionVideo:"Vos anciens projet",
         createVideo:"Créer votre prochain ",
         type:"Bibliothèque",
-        about:"Des descriptions Vidéo accrocheuses et convaincantes qui permettent de mieux classer vos vidéos"
+        about:"générateur de script optimiser pour des vidéos à format long"
     },
   };
   
