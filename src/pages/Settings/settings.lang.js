@@ -20,7 +20,7 @@ const texts = {
 
   fr: {
     plan: plans_fr,
-    change_details: "Modifier vo  s détails",
+    change_details: "Modifier vos détails",
     Profile: "Profil",
     Your_plan: "Votre plan",
     name_and_lastname: "Nom & Prénom",
@@ -32,7 +32,7 @@ const texts = {
     notext:"Vous n'avez aucun plan sur TubeScripter",
     nosubs:"Choisir Votre Plan",
     Your_current_plan: "Votre forfait actuel",
-    Cancel_Subscription: "Annuler Subscription",
+    Cancel_Subscription: "Annuler Abonnement",
   },
 };
 
