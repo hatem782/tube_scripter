@@ -24,11 +24,11 @@ const texts = {
      
     },
     circle2: {
-      title: "Script crée",
+      title: "Script créés",
      
     },
     circle3: {
-      title: "Mots généré",
+      title: "Mots générés",
      
     },
   },
